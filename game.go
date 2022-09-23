@@ -85,40 +85,6 @@ func s() {
   fmt.Print("\n")
 }
 
-// Area Template
-//func Area() {
-  //var validDirections = [2]string{"south", "west"}
-  //var userchoice string
-  //description := ""
-  //fmt.Println(description)
-  //fmt.Println("You can go", validDirections[0], "or", validDirections[1])
-
-  //for userchoice != validDirections[0] || userchoice != validDirections[1] {
-    //fmt.Print(" > ")
-    //fmt.Scan(&userchoice)
-    //if userchoice == "south" {
-      //fmt.Println("You go south")
-    //} else if userchoice == "west" {
-      //fmt.Println("You go west")
-    //} else if userchoice == "north" {
-      //fmt.Println("I'm sorry, That way is blocked")
-    //} else if userchoice == "east" {
-      //fmt.Println("I'm sorry, That way is blocked")
-    //} else if userchoice == "look" {
-      //fmt.Println(description)
-    //} else if userchoice == "inv" {
-      //i := inv("?")
-      //fmt.Println(i)
-    //} else if userchoice == "help" {
-      //help()
-    //} else if userchoice == "exit" {
-      //exit(0)
-    //} else {
-      //fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
-    //}
-  //}
-//}
-
 func startArea() {
   var validDirections = [2]string{"south", "west"}
   var userchoice string
@@ -589,13 +555,6 @@ func exitArea() {
 var inventory = []string{}
 
 func main() {
-
-  // User choices
-  //var verb, noun string
-
-  // Inventory
-  //var inv = []string{}
-
   name := intro()
   fmt.Print("Hope you enjoy the game, ", name, ". Good luck!\nIf you get stuck, try 'help'.\n\n")
   startArea()
