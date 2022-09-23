@@ -122,7 +122,7 @@ func startArea() {
         }
       } else {
         s()
-        fmt.Println("You pick up the axe. It's a nice heavy American logging axe.")
+        fmt.Println("You pick up the axe. It's a nice heavy American felling axe.")
         inv("axe")
       }
     } else if userchoice == "look" {
