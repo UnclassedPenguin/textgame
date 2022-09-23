@@ -168,6 +168,7 @@ func wArea() {
     if userchoice == "south" {
       s()
       fmt.Println("You go south.")
+      swArea()
     } else if userchoice == "east" {
       s()
       fmt.Println("You go east.")
@@ -392,7 +393,7 @@ func seArea() {
     } else if userchoice == "north" {
       s()
       fmt.Println("You go north.")
-      //NEED TO CREATE THIS AREA
+      eArea()
     } else if userchoice == "east" {
       cantGo()
     } else if userchoice == "look" {
