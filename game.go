@@ -393,9 +393,18 @@ func sArea() {
   var validDirections = [3]string{"north", "east", "west"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
-  s()
-  fmt.Println(description)
+  description1 := "This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground\nYou can go north, east, or west."
+  description2 := "This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
+
+  i := inv("?")
+  if contains("rope", i) {
+    s()
+    fmt.Println(description2)
+  } else {
+    s()
+    fmt.Println(description1)
+  }
+
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
     fmt.Print(" > ")
@@ -414,9 +423,32 @@ func sArea() {
       s()
       fmt.Println("You go west.")
       swArea()
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        fmt.Println("You drop the rope")
+        indexOfRope := indexOf("rope", inventory)
+        if indexOfRope != -1 {
+          inventory = append(inventory[:indexOfRope], inventory[indexOfRope+1:]...)
+        }
+      } else {
+        s()
+        fmt.Println("You pick up the Rope. It seems heavy enough to support your weight.")
+        inv("rope")
+      }
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      // Checks inventory, if you have rope in your inventory prints description without rope. 
+      // Otherwise prints the description that mentions the rope
+      i := inv("?")
+      if contains("rope", i) {
+      s()
+        fmt.Println(description2)
+      } else {
+      s()
+        fmt.Println(description1)
+      }
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -567,8 +599,12 @@ func neArea() {
       fmt.Println("You go south.")
       eArea()
     } else if userchoice == "west" {
-      s()
-      fmt.Println("MOOOOONSTEEEER")
+      i := inv("?")
+      if contains("sword", i) {
+        monsterFight()
+      } else {
+        fmt.Println("I don't think you can fight the monster without a sword...")
+      }
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -587,6 +623,20 @@ func neArea() {
       fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
+}
+
+
+func monsterFight() {
+  fmt.Println("You're gonna fight the monster")
+  rn := randNumber(2)
+  switch rn {
+    case 0:
+      fmt.Println("You defeat the monster and continue west.")
+      nArea()
+    case 1:
+      fmt.Println("You lose.")
+      neArea()
+    }
 }
 
 func nArea() {
@@ -634,7 +684,7 @@ func nArea() {
 
 func exitArea() {
   s()
-  fmt.Println("Congratulations, ", name, "!")
+  fmt.Print("Congratulations, ", name, "!\n")
   fmt.Println("YOU WIIIIIINNNNNNN!")
   fmt.Println("Hope you had fun! Bye!")
   exit(0)
