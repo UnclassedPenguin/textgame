@@ -189,7 +189,7 @@ func startArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option, or try 'help'\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
     }
   }
 }
@@ -244,7 +244,7 @@ func wArea() {
         fmt.Println("You say hi to the fish, but they don't seem interested in being friends.")
       } else {
         s()
-        fmt.Println("I'm sorry I don't understand fish. Please enter a valid option, or try 'help'")
+        fmt.Println("I'm sorry I don't understand 'fish'. Please enter a valid option, or try 'help'")
       }
     } else if userchoice == "look" {
       s()
@@ -261,7 +261,7 @@ func wArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option, or try 'help'\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
     }
   }
 }
@@ -327,7 +327,7 @@ func nwArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option, or try 'help'\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
     }
   }
 }
@@ -370,7 +370,7 @@ func swArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
@@ -415,7 +415,7 @@ func sArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
@@ -484,7 +484,7 @@ func seArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
@@ -527,7 +527,7 @@ func eArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
@@ -570,7 +570,7 @@ func neArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
@@ -613,15 +613,17 @@ func nArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand ", userchoice, ". Please enter a valid option\n")
+      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
     }
   }
 }
 
 func exitArea() {
   s()
+  fmt.Println("Congratulations, ", name, "!")
   fmt.Println("YOU WIIIIIINNNNNNN!")
   fmt.Println("Hope you had fun! Bye!")
+  exit(0)
 }
 
 
@@ -633,6 +635,8 @@ func exitArea() {
 //-----------------------------------------------------------------------------
 // Global variables start
 //-----------------------------------------------------------------------------
+
+var name string
 
 // Global inventory
 var inventory = []string{}
@@ -649,7 +653,7 @@ var event = map[string]bool {
 //-----------------------------------------------------------------------------
 
 func main() {
-  name := intro()
+  name = intro()
   fmt.Print("Hope you enjoy the game, ", name, ". Good luck!\nIf you get stuck, try 'help'.\n\n")
   startArea()
 }
