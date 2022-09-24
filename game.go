@@ -10,21 +10,30 @@ import (
 func intro() string{
   //NEEDS WORK. Make more descriptive/fun
   var name string
-  fmt.Println("This is the intro. It certaintly needs some work... Whats your name?")
+  s()
+  fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
+  s()
+  dashLine()
+  s()
+  fmt.Println("This is the intro. It certaintly needs some work...")
+  s()
+  dashLine()
+  s()
+  fmt.Println("What's your name?")
   fmt.Print(" > ")
   fmt.Scan(&name)
   return name
 }
 
 func help() {
-  fmt.Println("----------------------------------------------------------------")
+  dashLine()
   fmt.Println("Help: ")
   fmt.Println("To move a direction, simply type the direction you want to go.")
   fmt.Println("If there is an item, just try typing its name to pick it up.")
   fmt.Println("Type 'inv' to check whats in your inventory.")
   fmt.Println("Type 'look' to check your surroundings.")
   fmt.Println("Type 'exit' to exit the game.")
-  fmt.Println("----------------------------------------------------------------")
+  dashLine()
 }
 
 func exit(i int) {
@@ -32,11 +41,21 @@ func exit(i int) {
   os.Exit(i)
 }
 
+func dashLine() {
+  fmt.Println("--------------------------------------------------------------------------------")
+}
+
+// Get a single random number
+func randNumber(max int) int {
+  rand.Seed(time.Now().UnixNano())
+  rn := rand.Intn(max)
+  return rn
+}
+
 func cantGo() {
   //I'd like to make a few phrases here and randomly pick one to say, just
   //for some variety.
-  rand.Seed(time.Now().UnixNano())
-  rn := rand.Intn(2)
+  rn := randNumber(2)
   s()
   switch rn {
     case 0:
@@ -80,8 +99,7 @@ func indexOf(element string, data []string) (int) {
   return -1    //not found.
 }
 
-
-//s for give me some (S)pace
+//s for give me some (s)pace
 func s() {
   fmt.Print("\n")
 }
@@ -161,7 +179,14 @@ func startArea() {
 func wArea() {
   var validDirections = [3]string{"south", "east", "south"}
   var userchoice string
-  description := "There is a small pond here, and a log to the north. You can go east or south."
+  var description string
+
+  if event["log"] {
+    description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way. You can go east or south."
+  } else {
+  description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side. You can go north, east or south."
+  }
+
   fmt.Println(description)
   pond := false
 
@@ -174,6 +199,7 @@ func wArea() {
       if contains("axe", i) {
         s()
         fmt.Println("You use your axe to clear the log and travel north.")
+        event["log"] = false
         nwArea()
       } else {
         s()
@@ -291,7 +317,7 @@ func swArea() {
   var validDirections = [2]string{"north", "east"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is a rocky area. Don't slip!\nYou can go north or east."
+  description := "There is a stream running from the north. The banks are covered in rocks. Don't slip!\nYou can go north or east."
   s()
   fmt.Println(description)
 
@@ -378,8 +404,10 @@ func sArea() {
 func seArea() {
   var validDirections = [2]string{"north", "west"}
   var userchoice string
+  count := 0
+
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is SE AREA. \nYou can go north or west."
+  description := "This is SE AREA. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
   s()
   fmt.Println(description)
 
@@ -388,8 +416,32 @@ func seArea() {
     fmt.Scan(&userchoice)
     if userchoice == "north" {
       s()
-      fmt.Println("You go north.")
-      eArea()
+      i := inv("?")
+      // If you have the rope, you are guaranteed to climb the cliff. 
+      if contains("rope", i) {
+        s()
+        fmt.Println("You use the rope to climb the cliff.")
+        eArea()
+      // This is if you don't have a rope. Gives you a small change of
+      // climbing the cliff. Currently 1/20 chance. Too small? Too big? 
+      } else {
+        s()
+        if count < 5 {
+          fmt.Println("You decide to try free climbing the cliff...")
+          s()
+          rn := randNumber(20)
+          switch rn {
+            case 7:
+              fmt.Println("You used your skill to successfully climb the cliff!")
+              eArea()
+            default:
+              count += 1
+              fmt.Println("You failed to climb the cliff, and fell to the bottom! Ouch!")
+          }
+        } else {
+          fmt.Println("You're a little beat up from failed attempts. Maybe take a break, and try again later.")
+        }
+      }
     } else if userchoice == "east" {
       cantGo()
     } else if userchoice == "south" {
@@ -460,7 +512,6 @@ func eArea() {
     }
   }
 }
-
 
 //THIS AREA HAS THE MONSTER. NEED TO WRITE IT OUT
 func neArea() {
@@ -556,6 +607,13 @@ func exitArea() {
 
 // Global inventory
 var inventory = []string{}
+
+// Global event tracker
+// ask, Does it exist? if so, true. 
+var event = map[string]bool {
+  "log":true,
+  "monster":true,
+}
 
 func main() {
   name := intro()
