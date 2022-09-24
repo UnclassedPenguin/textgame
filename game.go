@@ -61,7 +61,7 @@ func inv(item string) []string {
 }
 
 // Check if item is contained in slice (inventory)
-func contains(s []string, str string) bool {
+func contains(str string, s []string) bool {
   for _, v := range s {
     if v == str {
       return true
@@ -93,7 +93,7 @@ func startArea() {
   description2 := "You find yourself in the middle of a forest.\nYou can go south or west."
 
   i := inv("?")
-  if contains(i, "axe") {
+  if contains("axe", i) {
     fmt.Println(description2)
   } else {
     fmt.Println(description1)
@@ -117,7 +117,7 @@ func startArea() {
     } else if userchoice == "axe" {
       s()
       i := inv("?")
-      if contains(i, "axe") {
+      if contains("axe", i) {
         fmt.Println("You drop the axe")
         indexOfAxe := indexOf("axe", inventory)
         if indexOfAxe != -1 {
@@ -133,7 +133,7 @@ func startArea() {
       // Checks inventory, if you have axe in your inventory prints description without axe. 
       // Otherwise prints the description that mentions the axe
       i := inv("?")
-      if contains(i, "axe") {
+      if contains("axe", i) {
       s()
         fmt.Println(description2)
       } else {
@@ -171,7 +171,7 @@ func wArea() {
     if userchoice == "north" {
       s()
       i := inv("?")
-      if contains(i, "axe") {
+      if contains("axe", i) {
         s()
         fmt.Println("You use your axe to clear the log and travel north.")
         nwArea()
@@ -227,7 +227,7 @@ func nwArea() {
   description1 := "There are tall trees all around you. The sun gleams through a few of the trees. Is that something shiny behind that tree? It almost looks like it could be a sword...\nYou can only go south."
   description2 := "There are tall trees all around you. The sun gleams through a few of the trees.\nYou can only go south."
   i := inv("?")
-  if contains(i, "sword") {
+  if contains("sword", i) {
     s()
     fmt.Println(description2)
   } else {
@@ -250,7 +250,7 @@ func nwArea() {
       cantGo()
     } else if userchoice == "sword" {
       i := inv("?")
-      if contains(i, "sword") {
+      if contains("sword", i) {
         s()
         fmt.Println("You drop the sword, but why would you want to do that?")
         indexOfSword := indexOf("sword", inventory)
@@ -264,7 +264,7 @@ func nwArea() {
       }
     } else if userchoice == "look" {
       i := inv("?")
-      if contains(i, "sword") {
+      if contains("sword", i) {
         s()
         fmt.Println(description2)
       } else {
