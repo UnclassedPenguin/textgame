@@ -7,25 +7,10 @@ import (
   "time"
 )
 
-func intro() string{
-  //NEEDS WORK. Make more descriptive/fun
-  var name string
-  s()
-  fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
-  fmt.Println("Author: Tyler(UnclassedPenguin)")
-  fmt.Println("Github: https://github.com/UnclassedPenguin/textgame.git")
-  s()
-  dashLine()
-  s()
-  fmt.Println("This is the intro. It certaintly needs some work...")
-  s()
-  dashLine()
-  s()
-  fmt.Println("What's your name?")
-  fmt.Print(" > ")
-  fmt.Scan(&name)
-  return name
-}
+
+//-----------------------------------------------------------------------------
+// Functions start
+//-----------------------------------------------------------------------------
 
 func help() {
   dashLine()
@@ -104,6 +89,35 @@ func indexOf(element string, data []string) (int) {
 //s for give me some (s)pace
 func s() {
   fmt.Print("\n")
+}
+
+//-----------------------------------------------------------------------------
+// Functions end
+//-----------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------
+// Areas start
+//-----------------------------------------------------------------------------
+
+func intro() string{
+  //NEEDS WORK. Make more descriptive/fun
+  var name string
+  s()
+  fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
+  fmt.Println("Author: Tyler(UnclassedPenguin)")
+  fmt.Println("Github: https://github.com/UnclassedPenguin/textgame.git")
+  s()
+  dashLine()
+  s()
+  fmt.Println("This is the intro. It certaintly needs some work...")
+  s()
+  dashLine()
+  s()
+  fmt.Println("What's your name?")
+  fmt.Print(" > ")
+  fmt.Scan(&name)
+  return name
 }
 
 func startArea() {
@@ -610,6 +624,16 @@ func exitArea() {
   fmt.Println("Hope you had fun! Bye!")
 }
 
+
+//-----------------------------------------------------------------------------
+// Areas end
+//-----------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------
+// Global variables start
+//-----------------------------------------------------------------------------
+
 // Global inventory
 var inventory = []string{}
 
@@ -619,6 +643,10 @@ var event = map[string]bool {
   "log":true,
   "monster":true,
 }
+
+//-----------------------------------------------------------------------------
+// Global variables end
+//-----------------------------------------------------------------------------
 
 func main() {
   name := intro()
