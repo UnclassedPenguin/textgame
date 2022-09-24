@@ -626,18 +626,47 @@ func neArea() {
 }
 
 
+
 func monsterFight() {
+  var userchoice int
+  var damage int
+  monsterHealth := 20
+  s()
   fmt.Println("You're gonna fight the monster")
-  rn := randNumber(2)
-  switch rn {
-    case 0:
-      fmt.Println("You defeat the monster and continue west.")
-      nArea()
-    case 1:
-      fmt.Println("You lose.")
-      neArea()
+
+  for monsterHealth > 0 {
+    rn := randNumber(10) + 1
+    s()
+    fmt.Println("Pick a number between 1 and 10")
+    fmt.Print(" > ")
+    fmt.Scan(&userchoice)
+    if userchoice <= 10 && userchoice >= 0 {
+      if userchoice > rn {
+        damage = userchoice - rn
+      } else {
+        damage = rn - userchoice
+      }
+      monsterHealth -= damage
+      s()
+      fmt.Println("You deal", damage, "to the monster.")
+      fmt.Println("--------diag---------------")
+      fmt.Println("Random Number:", rn)
+      fmt.Println("User choice:", userchoice)
+      fmt.Println("Damage:", damage)
+      fmt.Println("Monster Health:", monsterHealth)
+      fmt.Println("--------diag---------------")
+      if monsterHealth < 0 {
+        s()
+        fmt.Println("You Defeated the monster!")
+        nArea()
+      }
+    } else {
+      s()
+      fmt.Println("Invalid Number!")
     }
+  }
 }
+
 
 func nArea() {
   var validDirections = [2]string{"north", "east"}
