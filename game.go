@@ -35,25 +35,9 @@ func help() {
   dashLine()
 }
 
-func exit(i int) {
-  fmt.Println("Thanks For Playing!")
-  os.Exit(i)
-}
-
-func dashLine() {
-  fmt.Println("--------------------------------------------------------------------------------")
-}
-
-// Get a single random number
-func randNumber(max int) int {
-  rand.Seed(time.Now().UnixNano())
-  rn := rand.Intn(max)
-  return rn
-}
-
+//I'd like to make a few phrases here and randomly pick one to say, just
+//for some variety.
 func cantGo() {
-  //I'd like to make a few phrases here and randomly pick one to say, just
-  //for some variety.
   rn := randNumber(2)
   switch rn {
     case 0:
@@ -68,6 +52,7 @@ func cantGo() {
     }
 }
 
+// Adds an item to the inventory, or just returns the inventory
 func inv(item string) []string {
   if item == "?" {
     return inventory
@@ -97,10 +82,28 @@ func indexOf(element string, data []string) (int) {
   return -1    //not found.
 }
 
+// Just prints a seperator
+func dashLine() {
+  fmt.Println("--------------------------------------------------------------------------------")
+}
+
+// Get a single random number
+func randNumber(max int) int {
+  rand.Seed(time.Now().UnixNano())
+  rn := rand.Intn(max)
+  return rn
+}
+
 //s for give me some (s)pace
 func s() {
   fmt.Print("\n")
 }
+
+func exit(i int) {
+  fmt.Println("Thanks For Playing!")
+  os.Exit(i)
+}
+
 
 //-----------------------------------------------------------------------------
 // Functions end
@@ -117,7 +120,7 @@ func intro() string{
   s()
   fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
   fmt.Println("Author: Tyler(UnclassedPenguin)")
-  fmt.Println("Github: https://github.com/UnclassedPenguin/textgame.git")
+  fmt.Println("Github: https://github.com/UnclassedPenguin/textgame/")
   s()
   dashLine()
   s()
