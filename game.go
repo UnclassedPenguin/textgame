@@ -12,6 +12,8 @@ func intro() string{
   var name string
   s()
   fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
+  fmt.Println("Author: Tyler(UnclassedPenguin)")
+  fmt.Println("Github: https://github.com/UnclassedPenguin/textgame.git")
   s()
   dashLine()
   s()
@@ -112,8 +114,10 @@ func startArea() {
 
   i := inv("?")
   if contains("axe", i) {
+    s()
     fmt.Println(description2)
   } else {
+    s()
     fmt.Println(description1)
   }
 
@@ -187,6 +191,7 @@ func wArea() {
   description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side. You can go north, east or south."
   }
 
+  s()
   fmt.Println(description)
   pond := false
 
