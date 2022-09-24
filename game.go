@@ -17,6 +17,8 @@ import (
   "os"
   "math/rand"
   "time"
+  "strings"
+  "flag"
 )
 
 
@@ -50,6 +52,25 @@ func cantGo() {
       s()
       fmt.Println("I'm sorry, you can't go that way")
     }
+}
+
+// Prints the text character by character.
+func printSlow(str string) {
+  if slowMode {
+    stringSplit := strings.Split(str, "")
+    for _, l := range stringSplit {
+      if l != " " {
+        fmt.Print(l)
+        time.Sleep(30 * time.Millisecond)
+      } else {
+        fmt.Print(l)
+        time.Sleep(70 * time.Millisecond)
+      }
+    }
+    fmt.Print("\n")
+  } else {
+    fmt.Println(str)
+  }
 }
 
 // Adds an item to the inventory, or just returns the inventory
@@ -143,10 +164,10 @@ func startArea() {
   i := inv("?")
   if contains("axe", i) {
     s()
-    fmt.Println(description2)
+    printSlow(description2)
   } else {
     s()
-    fmt.Println(description1)
+    printSlow(description1)
   }
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
@@ -158,24 +179,24 @@ func startArea() {
       cantGo()
     } else if userchoice == "south" {
       s()
-      fmt.Println("You go south.")
+      printSlow("You go sotuh.")
       sArea()
     } else if userchoice == "west" {
       s()
-      fmt.Println("You go west.")
+      printSlow("You go west.")
       wArea()
     } else if userchoice == "axe" {
       s()
       i := inv("?")
       if contains("axe", i) {
-        fmt.Println("You drop the axe")
+        printSlow("You drop the axe.")
         indexOfAxe := indexOf("axe", inventory)
         if indexOfAxe != -1 {
           inventory = append(inventory[:indexOfAxe], inventory[indexOfAxe+1:]...)
         }
       } else {
         s()
-        fmt.Println("You pick up the axe. It's a nice heavy American felling axe.")
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
         inv("axe")
       }
     } else if userchoice == "look" {
@@ -185,10 +206,10 @@ func startArea() {
       i := inv("?")
       if contains("axe", i) {
       s()
-        fmt.Println(description2)
+        printSlow(description2)
       } else {
       s()
-        fmt.Println(description1)
+        printSlow(description1)
       }
     } else if userchoice == "inv" {
       s()
@@ -203,7 +224,8 @@ func startArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
+      //fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option, or try 'help'\n")
     }
   }
 }
@@ -220,7 +242,7 @@ func wArea() {
   }
 
   s()
-  fmt.Println(description)
+  printSlow(description)
   pond := false
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
@@ -231,38 +253,38 @@ func wArea() {
       i := inv("?")
       if contains("axe", i) {
         s()
-        fmt.Println("You use your axe to clear the log and travel north.")
+        printSlow("You use your axe to clear the log and travel north.")
         event["log"] = false
         nwArea()
       } else {
         s()
-        fmt.Println("There is a log blocking the way! If only you had a way to clear it...")
+        printSlow("There is a log blocking the way! If only you had a way to clear it...")
       }
     } else if userchoice == "east" {
       s()
-      fmt.Println("You go east.")
+      printSlow("You go east.")
       startArea()
     } else if userchoice == "south" {
       s()
-      fmt.Println("You go south.")
+      printSlow("You go south.")
       swArea()
     } else if userchoice == "west" {
       cantGo()
     } else if userchoice == "pond" {
       s()
       pond = true
-      fmt.Println("You look in the pond. There are some small fish swimming around.")
+      printSlow("You look in the pond. There are some small fish swimming around.")
     } else if userchoice == "fish" {
       if pond == true {
         s()
-        fmt.Println("You say hi to the fish, but they don't seem interested in being friends.")
+        printSlow("You say hi to the fish, but they don't seem interested in being friends.")
       } else {
         s()
-        fmt.Println("I'm sorry I don't understand 'fish'. Please enter a valid option, or try 'help'")
+        printSlow("I'm sorry I don't understand 'fish'. Please enter a valid option, or try 'help'")
       }
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -288,10 +310,10 @@ func nwArea() {
   i := inv("?")
   if contains("sword", i) {
     s()
-    fmt.Println(description2)
+    printSlow(description2)
   } else {
     s()
-    fmt.Println(description1)
+    printSlow(description1)
   }
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
@@ -303,7 +325,7 @@ func nwArea() {
       cantGo()
     } else if userchoice == "south" {
       s()
-      fmt.Println("You go south")
+      printSlow("You go south")
       wArea()
     } else if userchoice == "west" {
       cantGo()
@@ -311,24 +333,24 @@ func nwArea() {
       i := inv("?")
       if contains("sword", i) {
         s()
-        fmt.Println("You drop the sword, but why would you want to do that?")
+        printSlow("You drop the sword, but why would you want to do that?")
         indexOfSword := indexOf("sword", inventory)
         if indexOfSword != -1 {
           inventory = append(inventory[:indexOfSword], inventory[indexOfSword+1:]...)
         }
       } else {
         s()
-        fmt.Println("You go and look behind the trees. Sure enough, there is a long sword laying in the grass. Who would have dropped this?! You pick it up.")
+        printSlow("You go and look behind the trees. Sure enough, there is a long sword laying in the grass. Who would have dropped this?! You pick it up.")
         inv("sword")
       }
     } else if userchoice == "look" {
       i := inv("?")
       if contains("sword", i) {
         s()
-        fmt.Println(description2)
+        printSlow(description2)
       } else {
         s()
-        fmt.Println(description1)
+        printSlow(description1)
       }
     } else if userchoice == "inv" {
       i := inv("?")
@@ -352,18 +374,18 @@ func swArea() {
   //THIS DESCRIPTION NEEDS WORK
   description := "There is a stream running from the north. The banks are covered in rocks. Don't slip!\nYou can go north or east."
   s()
-  fmt.Println(description)
+  printSlow(description)
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
       s()
-      fmt.Println("You go north.")
+      printSlow("You go north.")
       wArea()
     } else if userchoice == "east" {
       s()
-      fmt.Println("You go east.")
+      printSlow("You go east.")
       sArea()
     } else if userchoice == "south" {
       cantGo()
@@ -371,7 +393,7 @@ func swArea() {
       cantGo()
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -399,10 +421,10 @@ func sArea() {
   i := inv("?")
   if contains("rope", i) {
     s()
-    fmt.Println(description2)
+    printSlow(description2)
   } else {
     s()
-    fmt.Println(description1)
+    printSlow(description1)
   }
 
 
@@ -411,30 +433,30 @@ func sArea() {
     fmt.Scan(&userchoice)
     if userchoice == "north" {
       s()
-      fmt.Println("You go north.")
+      printSlow("You go north.")
       startArea()
     } else if userchoice == "east" {
       s()
-      fmt.Println("You go east.")
+      printSlow("You go east.")
       seArea()
     } else if userchoice == "south" {
       cantGo()
     } else if userchoice == "west" {
       s()
-      fmt.Println("You go west.")
+      printSlow("You go west.")
       swArea()
     } else if userchoice == "rope" {
       s()
       i := inv("?")
       if contains("rope", i) {
-        fmt.Println("You drop the rope")
+        printSlow("You drop the rope")
         indexOfRope := indexOf("rope", inventory)
         if indexOfRope != -1 {
           inventory = append(inventory[:indexOfRope], inventory[indexOfRope+1:]...)
         }
       } else {
         s()
-        fmt.Println("You pick up the Rope. It seems heavy enough to support your weight.")
+        printSlow("You pick up the Rope. It seems heavy enough to support your weight.")
         inv("rope")
       }
     } else if userchoice == "look" {
@@ -444,10 +466,10 @@ func sArea() {
       i := inv("?")
       if contains("rope", i) {
       s()
-        fmt.Println(description2)
+        printSlow(description2)
       } else {
       s()
-        fmt.Println(description1)
+        printSlow(description1)
       }
     } else if userchoice == "inv" {
       s()
@@ -474,7 +496,7 @@ func seArea() {
   //THIS DESCRIPTION NEEDS WORK
   description := "This is SE AREA. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
   s()
-  fmt.Println(description)
+  printSlow(description)
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
@@ -485,26 +507,26 @@ func seArea() {
       // If you have the rope, you are guaranteed to climb the cliff. 
       if contains("rope", i) {
         s()
-        fmt.Println("You use the rope to climb the cliff.")
+        printSlow("You use the rope to climb the cliff.")
         eArea()
       // This is if you don't have a rope. Gives you a small change of
       // climbing the cliff. Currently 1/20 chance. Too small? Too big? 
       } else {
         s()
         if count < 5 {
-          fmt.Println("You decide to try free climbing the cliff...")
+          printSlow("You decide to try free climbing the cliff...")
           s()
           rn := randNumber(20)
           switch rn {
             case 7:
-              fmt.Println("You used your skill to successfully climb the cliff!")
+              printSlow("You used your skill to successfully climb the cliff!")
               eArea()
             default:
               count += 1
-              fmt.Println("You failed to climb the cliff, and fell to the bottom! Ouch!")
+              printSlow("You failed to climb the cliff, and fell to the bottom! Ouch!")
           }
         } else {
-          fmt.Println("You're a little beat up from failed attempts. Maybe take a break, and try again later.")
+          printSlow("You're a little beat up from failed attempts. Maybe take a break, and try again later.")
         }
       }
     } else if userchoice == "east" {
@@ -513,11 +535,11 @@ func seArea() {
       cantGo()
     } else if userchoice == "west" {
       s()
-      fmt.Println("You go west.")
+      printSlow("You go west.")
       sArea()
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -541,26 +563,26 @@ func eArea() {
   //THIS DESCRIPTION NEEDS WORK
   description := "This is E AREA. \nYou can go north or south."
   s()
-  fmt.Println(description)
+  printSlow(description)
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
       s()
-      fmt.Println("You go north.")
+      printSlow("You go north.")
       neArea()
     } else if userchoice == "east" {
       cantGo()
     } else if userchoice == "south" {
       s()
-      fmt.Println("You go south.")
+      printSlow("You go south.")
       seArea()
     } else if userchoice == "west" {
       cantGo()
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -585,7 +607,7 @@ func neArea() {
   //THIS DESCRIPTION NEEDS WORK
   description := "This is NE AREA. \nYou can go west or south."
   s()
-  fmt.Println(description)
+  printSlow(description)
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
@@ -596,18 +618,18 @@ func neArea() {
       cantGo()
     } else if userchoice == "south" {
       s()
-      fmt.Println("You go south.")
+      printSlow("You go south.")
       eArea()
     } else if userchoice == "west" {
       i := inv("?")
       if contains("sword", i) {
         monsterFight()
       } else {
-        fmt.Println("I don't think you can fight the monster without a sword...")
+        printSlow("I don't think you can fight the monster without a sword...")
       }
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -632,12 +654,12 @@ func monsterFight() {
   var damage int
   monsterHealth := 20
   s()
-  fmt.Println("You're gonna fight the monster")
+  printSlow("You're gonna fight the monster")
 
   for monsterHealth > 0 {
     rn := randNumber(10) + 1
     s()
-    fmt.Println("Pick a number between 1 and 10")
+    printSlow("Pick a number between 1 and 10")
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice <= 10 && userchoice >= 0 {
@@ -648,7 +670,7 @@ func monsterFight() {
       }
       monsterHealth -= damage
       s()
-      fmt.Println("You deal", damage, "to the monster.")
+      printSlow("You deal " + string(damage) + " to the monster.")
       fmt.Println("--------diag---------------")
       fmt.Println("Random Number:", rn)
       fmt.Println("User choice:", userchoice)
@@ -657,7 +679,7 @@ func monsterFight() {
       fmt.Println("--------diag---------------")
       if monsterHealth < 0 {
         s()
-        fmt.Println("You Defeated the monster!")
+        printSlow("You Defeated the monster!")
         nArea()
       }
     } else {
@@ -674,18 +696,18 @@ func nArea() {
   //THIS DESCRIPTION NEEDS WORK
   description := "This is NE AREA. \nYou can go north or east."
   s()
-  fmt.Println(description)
+  printSlow(description)
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
       s()
-      fmt.Println("You go north.")
+      printSlow("You go north.")
       exitArea()
     } else if userchoice == "east" {
       s()
-      fmt.Println("You go east.")
+      printSlow("You go east.")
       neArea()
     } else if userchoice == "south" {
       cantGo()
@@ -693,7 +715,7 @@ func nArea() {
       cantGo()
     } else if userchoice == "look" {
       s()
-      fmt.Println(description)
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -713,9 +735,9 @@ func nArea() {
 
 func exitArea() {
   s()
-  fmt.Print("Congratulations, ", name, "!\n")
-  fmt.Println("YOU WIIIIIINNNNNNN!")
-  fmt.Println("Hope you had fun! Bye!")
+  printSlow("Congratulations, " + name + "!")
+  printSlow("YOU WIIIIIINNNNNNN!")
+  printSlow("Hope you had fun! Bye!")
   exit(0)
 }
 
@@ -730,6 +752,7 @@ func exitArea() {
 //-----------------------------------------------------------------------------
 
 var name string
+var slowMode bool
 
 // Global inventory
 var inventory = []string{}
@@ -746,6 +769,11 @@ var event = map[string]bool {
 //-----------------------------------------------------------------------------
 
 func main() {
+
+  flag.BoolVar(&slowMode, "s", false, "Print out the text in slow mode")
+  flag.Parse()
+
+  fmt.Println("slow mode flag: ", slowMode)
   name = intro()
   fmt.Print("Hope you enjoy the game, ", name, ". Good luck!\nIf you get stuck, try 'help'.\n\n")
   startArea()
