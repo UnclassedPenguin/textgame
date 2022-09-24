@@ -20,7 +20,7 @@ $ ./game
 ## Things to do.
 
 - Intro
-- Add the rope item
+- ~~Add the rope item~~
 - Make inventory a little prettier instead of just printint out an array ha. 
 - Continue work on area descriptions
 - Need to come up with a mini game for fighting the monster...skill, or luck?
