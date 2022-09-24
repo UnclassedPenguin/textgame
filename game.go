@@ -180,7 +180,7 @@ func startArea() {
       cantGo()
     } else if userchoice == "south" {
       s()
-      printSlow("You go sotuh.")
+      printSlow("You go south.")
       sArea()
     } else if userchoice == "west" {
       s()
@@ -685,11 +685,11 @@ func monsterFight() {
         }
       } else {
         s()
-        slowPrint("Invalid Number!")
+        printSlow("Invalid Number!")
       }
     }
   } else {
-    slowPrint("You go west")
+    printSlow("You go west")
     nArea()
   }
 }
@@ -778,6 +778,7 @@ func main() {
   flag.Parse()
 
   name = intro()
-  printSlow("Hope you enjoy the game, "+ name+ ". Good luck!\nIf you get stuck, try 'help'.\n\n")
+  s()
+  printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.\n")
   startArea()
 }
