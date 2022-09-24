@@ -650,51 +650,58 @@ func neArea() {
 
 
 func monsterFight() {
-  var userchoice int
-  var damage int
-  monsterHealth := 20
-  s()
-  printSlow("You're gonna fight the monster")
-
-  for monsterHealth > 0 {
-    rn := randNumber(10) + 1
+  if event["monster"] {
+    var userchoice int
+    var damage int
+    monsterHealth := 20
     s()
-    printSlow("Pick a number between 1 and 10")
-    fmt.Print(" > ")
-    fmt.Scan(&userchoice)
-    if userchoice <= 10 && userchoice >= 0 {
-      if userchoice > rn {
-        damage = userchoice - rn
-      } else {
-        damage = rn - userchoice
-      }
-      monsterHealth -= damage
+    fmt.Println("You're gonna fight the monster")
+
+    for monsterHealth > 0 {
+      rn := randNumber(10) + 1
       s()
-      printSlow("You deal " + string(damage) + " to the monster.")
-      fmt.Println("--------diag---------------")
-      fmt.Println("Random Number:", rn)
-      fmt.Println("User choice:", userchoice)
-      fmt.Println("Damage:", damage)
-      fmt.Println("Monster Health:", monsterHealth)
-      fmt.Println("--------diag---------------")
-      if monsterHealth < 0 {
+      fmt.Println("Pick a number between 1 and 10")
+      fmt.Print(" > ")
+      fmt.Scan(&userchoice)
+      if userchoice <= 10 && userchoice >= 0 {
+        if userchoice > rn {
+          damage = userchoice - rn
+        } else {
+          damage = rn - userchoice
+        }
+        monsterHealth -= damage
         s()
-        printSlow("You Defeated the monster!")
-        nArea()
+        fmt.Println("You deal", damage, "to the monster.")
+        fmt.Println("--------diag---------------")
+        fmt.Println("Random Number:", rn)
+        fmt.Println("User choice:", userchoice)
+        fmt.Println("Damage:", damage)
+        fmt.Println("Monster Health:", monsterHealth)
+        fmt.Println("--------diag---------------")
+        if monsterHealth < 0 {
+          s()
+          fmt.Println("You Defeated the monster!")
+          event["monster"] = false
+          nArea()
+        }
+      } else {
+        s()
+        fmt.Println("Invalid Number!")
       }
-    } else {
-      s()
-      fmt.Println("Invalid Number!")
     }
+  } else {
+    fmt.Println("You go west")
+    nArea()
   }
 }
+
 
 
 func nArea() {
   var validDirections = [2]string{"north", "east"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is NE AREA. \nYou can go north or east."
+  description := "This is N AREA. \nYou can go north or east."
   s()
   printSlow(description)
 
