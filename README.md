@@ -1,8 +1,8 @@
-# My Text Adventure
+## My Text Adventure
 
 Just doing this for fun. Seeing where it goes...Does anyone play these anymore, anyway?
 
-## Install
+### Install
 
 - Clone this repository.
 - cd into folder
@@ -17,7 +17,7 @@ $ go build game.go
 $ ./game
 ```
 
-## Things to do.
+### To-do:
 
 - Intro
 - ~~Add the rope item~~
