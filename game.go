@@ -19,6 +19,7 @@ import (
   "time"
   "strings"
   "flag"
+  "strconv"
 )
 
 
@@ -224,7 +225,6 @@ func startArea() {
       exit(0)
     } else {
       s()
-      //fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
       printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option, or try 'help'\n")
     }
   }
@@ -297,7 +297,7 @@ func wArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -363,7 +363,7 @@ func nwArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option, or try 'help'\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -406,7 +406,7 @@ func swArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -483,7 +483,7 @@ func sArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -552,7 +552,7 @@ func seArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -595,7 +595,7 @@ func eArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
@@ -642,25 +642,24 @@ func neArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
-
-
 
 func monsterFight() {
   if event["monster"] {
     var userchoice int
     var damage int
+    //var stringDamage string
     monsterHealth := 20
     s()
-    fmt.Println("You're gonna fight the monster")
+    printSlow("You're gonna fight the monster")
 
     for monsterHealth > 0 {
       rn := randNumber(10) + 1
       s()
-      fmt.Println("Pick a number between 1 and 10")
+      printSlow("Pick a number between 1 and 10")
       fmt.Print(" > ")
       fmt.Scan(&userchoice)
       if userchoice <= 10 && userchoice >= 0 {
@@ -671,7 +670,7 @@ func monsterFight() {
         }
         monsterHealth -= damage
         s()
-        fmt.Println("You deal", damage, "to the monster.")
+        printSlow("You deal " + strconv.Itoa(damage) + " damage to the monster.")
         fmt.Println("--------diag---------------")
         fmt.Println("Random Number:", rn)
         fmt.Println("User choice:", userchoice)
@@ -680,22 +679,20 @@ func monsterFight() {
         fmt.Println("--------diag---------------")
         if monsterHealth < 0 {
           s()
-          fmt.Println("You Defeated the monster!")
+          printSlow("You Defeated the monster!")
           event["monster"] = false
           nArea()
         }
       } else {
         s()
-        fmt.Println("Invalid Number!")
+        slowPrint("Invalid Number!")
       }
     }
   } else {
-    fmt.Println("You go west")
+    slowPrint("You go west")
     nArea()
   }
 }
-
-
 
 func nArea() {
   var validDirections = [2]string{"north", "east"}
@@ -735,7 +732,7 @@ func nArea() {
       exit(0)
     } else {
       s()
-      fmt.Print("I'm sorry I don't understand '", userchoice, "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
     }
   }
 }
