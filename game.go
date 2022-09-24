@@ -43,7 +43,6 @@ func cantGo() {
   //I'd like to make a few phrases here and randomly pick one to say, just
   //for some variety.
   rn := randNumber(2)
-  s()
   switch rn {
     case 0:
       s()
