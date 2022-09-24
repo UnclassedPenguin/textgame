@@ -780,8 +780,7 @@ func main() {
   flag.BoolVar(&slowMode, "s", false, "Print out the text in slow mode")
   flag.Parse()
 
-  fmt.Println("slow mode flag: ", slowMode)
   name = intro()
-  fmt.Print("Hope you enjoy the game, ", name, ". Good luck!\nIf you get stuck, try 'help'.\n\n")
+  printSlow("Hope you enjoy the game, "+ name+ ". Good luck!\nIf you get stuck, try 'help'.\n\n")
   startArea()
 }
