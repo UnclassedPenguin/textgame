@@ -37,6 +37,7 @@ func cantGo() {
   //for some variety.
   rand.Seed(time.Now().UnixNano())
   rn := rand.Intn(2)
+  s()
   switch rn {
     case 0:
       s()
@@ -101,16 +102,18 @@ func startArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
+    if userchoice == "north" {
+      cantGo()
+    } else if userchoice == "east" {
+      cantGo()
+    } else if userchoice == "south" {
       s()
-      fmt.Println("You go south")
+      fmt.Println("You go south.")
       sArea()
     } else if userchoice == "west" {
       s()
-      fmt.Println("You go west")
+      fmt.Println("You go west.")
       wArea()
-    } else if userchoice == "north" || userchoice == "east" {
-      cantGo()
     } else if userchoice == "axe" {
       s()
       i := inv("?")
@@ -165,27 +168,26 @@ func wArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      s()
-      fmt.Println("You go south.")
-      swArea()
-    } else if userchoice == "east" {
-      s()
-      fmt.Println("You go east.")
-      startArea()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       i := inv("?")
       if contains(i, "axe") {
         s()
-        fmt.Println("You use your axe to clear the log and travel north")
+        fmt.Println("You use your axe to clear the log and travel north.")
         nwArea()
       } else {
         s()
         fmt.Println("There is a log blocking the way! If only you had a way to clear it...")
       }
-    } else if userchoice == "west" {
+    } else if userchoice == "east" {
       s()
+      fmt.Println("You go east.")
+      startArea()
+    } else if userchoice == "south" {
+      s()
+      fmt.Println("You go south.")
+      swArea()
+    } else if userchoice == "west" {
       cantGo()
     } else if userchoice == "pond" {
       s()
@@ -236,15 +238,15 @@ func nwArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
+    if userchoice == "north" {
+      cantGo()
+    } else if userchoice == "east" {
+      cantGo()
+    } else if userchoice == "south" {
       s()
       fmt.Println("You go south")
       wArea()
     } else if userchoice == "west" {
-      cantGo()
-    } else if userchoice == "north" {
-      cantGo()
-    } else if userchoice == "east" {
       cantGo()
     } else if userchoice == "sword" {
       i := inv("?")
@@ -296,11 +298,7 @@ func swArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      cantGo()
-    } else if userchoice == "west" {
-      cantGo()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       fmt.Println("You go north.")
       wArea()
@@ -308,6 +306,10 @@ func swArea() {
       s()
       fmt.Println("You go east.")
       sArea()
+    } else if userchoice == "south" {
+      cantGo()
+    } else if userchoice == "west" {
+      cantGo()
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -339,13 +341,7 @@ func sArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      cantGo()
-    } else if userchoice == "west" {
-      s()
-      fmt.Println("You go west.")
-      swArea()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       fmt.Println("You go north.")
       startArea()
@@ -353,6 +349,12 @@ func sArea() {
       s()
       fmt.Println("You go east.")
       seArea()
+    } else if userchoice == "south" {
+      cantGo()
+    } else if userchoice == "west" {
+      s()
+      fmt.Println("You go west.")
+      swArea()
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -384,18 +386,18 @@ func seArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      cantGo()
-    } else if userchoice == "west" {
-      s()
-      fmt.Println("You go west.")
-      sArea()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       fmt.Println("You go north.")
       eArea()
     } else if userchoice == "east" {
       cantGo()
+    } else if userchoice == "south" {
+      cantGo()
+    } else if userchoice == "west" {
+      s()
+      fmt.Println("You go west.")
+      sArea()
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -427,17 +429,17 @@ func eArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      s()
-      fmt.Println("You go south.")
-      seArea()
-    } else if userchoice == "west" {
-      cantGo()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       fmt.Println("You go north.")
       neArea()
     } else if userchoice == "east" {
+      cantGo()
+    } else if userchoice == "south" {
+      s()
+      fmt.Println("You go south.")
+      seArea()
+    } else if userchoice == "west" {
       cantGo()
     } else if userchoice == "look" {
       s()
@@ -472,17 +474,17 @@ func neArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
+    if userchoice == "north" {
+      cantGo()
+    } else if userchoice == "east" {
+      cantGo()
+    } else if userchoice == "south" {
       s()
       fmt.Println("You go south.")
       eArea()
     } else if userchoice == "west" {
       s()
       fmt.Println("MOOOOONSTEEEER")
-    } else if userchoice == "north" {
-      cantGo()
-    } else if userchoice == "east" {
-      cantGo()
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -514,11 +516,7 @@ func nArea() {
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "south" {
-      cantGo()
-    } else if userchoice == "west" {
-      cantGo()
-    } else if userchoice == "north" {
+    if userchoice == "north" {
       s()
       fmt.Println("You go north.")
       exitArea()
@@ -526,6 +524,10 @@ func nArea() {
       s()
       fmt.Println("You go east.")
       neArea()
+    } else if userchoice == "south" {
+      cantGo()
+    } else if userchoice == "west" {
+      cantGo()
     } else if userchoice == "look" {
       s()
       fmt.Println(description)
@@ -552,7 +554,7 @@ func exitArea() {
   fmt.Println("Hope you had fun! Bye!")
 }
 
-
+// Global inventory
 var inventory = []string{}
 
 func main() {
