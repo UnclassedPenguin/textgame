@@ -236,9 +236,9 @@ func wArea() {
   var description string
 
   if event["log"] {
-    description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way. You can go east or south."
+    description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
   } else {
-  description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side. You can go north, east or south."
+  description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
   }
 
   s()
