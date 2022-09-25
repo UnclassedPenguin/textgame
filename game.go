@@ -41,17 +41,23 @@ func help() {
 //I'd like to make a few phrases here and randomly pick one to say, just
 //for some variety.
 func cantGo() {
-  rn := randNumber(2)
+  rn := randNumber(4)
   switch rn {
     case 0:
       s()
-      fmt.Println("I'm sorry, That way is blocked")
+      printSlow("I'm sorry, That way is blocked.")
     case 1:
       s()
-      fmt.Println("I'm sorry, you can't go that way")
+      printSlow("I'm sorry, you can't go that way.")
+    case 2:
+      s()
+      printSlow("Doesn't seem to be a path in that direction.")
+    case 3:
+      s()
+      printSlow("Its not possible to go that way.")
     default:
       s()
-      fmt.Println("I'm sorry, you can't go that way")
+      printSlow("How'd you get here?")
     }
 }
 
