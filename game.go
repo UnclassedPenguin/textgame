@@ -68,10 +68,10 @@ func printSlow(str string) {
     for _, l := range stringSplit {
       if l != " " {
         fmt.Print(l)
-        time.Sleep(30 * time.Millisecond)
+        time.Sleep(20 * time.Millisecond)
       } else {
         fmt.Print(l)
-        time.Sleep(70 * time.Millisecond)
+        time.Sleep(50 * time.Millisecond)
       }
     }
     fmt.Print("\n")
