@@ -683,7 +683,7 @@ func monsterFight() {
         fmt.Println("Damage:", damage)
         fmt.Println("Monster Health:", monsterHealth)
         fmt.Println("--------diag---------------")
-        if monsterHealth < 0 {
+        if monsterHealth <= 0 {
           s()
           printSlow("You Defeated the monster!")
           event["monster"] = false
