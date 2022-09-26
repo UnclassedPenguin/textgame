@@ -1,0 +1,149 @@
+intro
+---------------------------------------------------------------------
+This is the intro. It certaintly needs some work...
+---------------------------------------------------------------------
+
+startArea
+---------------------------------------------------------------------
+Item:
+axe
+
+look at:
+n/a(yet)
+
+description1:
+"You find yourself in the middle of a forest. There is an axe leaning up against a tree.\nYou can go south or west."
+
+description2:
+"You find yourself in the middle of a forest.\nYou can go south or west."
+
+---------------------------------------------------------------------
+
+wArea
+---------------------------------------------------------------------
+item:
+n/a(yet)
+
+look at: 
+  pond: "You look in the pond. There are some small fish swimming around." 
+  fish: "You say hi to the fish, but they don't seem interested in being friends."
+
+
+description1:
+"There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
+
+description2:
+"There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
+
+---------------------------------------------------------------------
+
+nwArea
+---------------------------------------------------------------------
+item:
+sword
+
+look at:
+
+description1:
+"There are tall trees all around you. The sun gleams through a few of the trees. Is that something shiny behind that tree? It almost looks like it could be a sword...\nYou can only go south."
+
+description2:
+"There are tall trees all around you. The sun gleams through a few of the trees.\nYou can only go south."
+
+---------------------------------------------------------------------
+
+swArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+"There is a stream running from the north. The banks are covered in rocks. Don't slip!\nYou can go north or east."
+
+description2:
+
+---------------------------------------------------------------------
+
+sArea
+---------------------------------------------------------------------
+item:
+rope
+
+look at:
+
+description1:
+"This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground\nYou can go north, east, or west."
+
+description2:
+"This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
+
+---------------------------------------------------------------------
+
+seArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+"This is SE AREA. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
+
+description2:
+
+---------------------------------------------------------------------
+
+eArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+"This is E AREA. \nYou can go north or south."
+
+description2:
+
+---------------------------------------------------------------------
+
+neArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+"This is NE AREA. \nYou can go west or south."
+
+description2:
+
+---------------------------------------------------------------------
+
+monster
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+nArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+"This is N AREA. \nYou can go north or east."
+
+description2:
+
+---------------------------------------------------------------------
+
+endwArea
+---------------------------------------------------------------------
+item:
+
+look at:
+
+description1:
+
+description2:
+
+---------------------------------------------------------------------

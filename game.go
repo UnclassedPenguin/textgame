@@ -54,7 +54,7 @@ func cantGo() {
       printSlow("Doesn't seem to be a path in that direction.")
     case 3:
       s()
-      printSlow("Its not possible to go that way.")
+      printSlow("It's not possible to go that way.")
     default:
       s()
       printSlow("How'd you get here?")
@@ -110,7 +110,7 @@ func indexOf(element string, data []string) (int) {
   return -1    //not found.
 }
 
-// Just prints a seperator
+// Just prints a separator
 func dashLine() {
   fmt.Println("--------------------------------------------------------------------------------")
 }
