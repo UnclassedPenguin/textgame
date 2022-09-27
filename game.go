@@ -444,8 +444,8 @@ func sArea() {
   var validDirections = [3]string{"north", "east", "west"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description1 := "You find yourself in clear grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass\nYou can go north, east, or west."
-  description2 := "You find yourself in clear grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
+  description1 := "You find yourself in open grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass\nYou can go north, east, or west."
+  description2 := "You find yourself in open grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
 
   i := inv("?")
   if contains("rope", i) {
