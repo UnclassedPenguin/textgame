@@ -296,7 +296,7 @@ func wArea() {
       // if user doesn't have axe and log is still there
       } else {
         s()
-        printSlow("There is a log blocking the way! If only you had a way to clear it...")
+        printSlow("What axe?")
       }
       // if user already cleared log
     } else if userchoice == "axe" && event["log"] == false {
