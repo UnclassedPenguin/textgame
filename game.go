@@ -68,10 +68,10 @@ func printSlow(str string) {
     for _, l := range stringSplit {
       if l != " " {
         fmt.Print(l)
-        time.Sleep(20 * time.Millisecond)
+        time.Sleep(25 * time.Millisecond)
       } else {
         fmt.Print(l)
-        time.Sleep(50 * time.Millisecond)
+        time.Sleep(55 * time.Millisecond)
       }
     }
     fmt.Print("\n")
@@ -160,7 +160,7 @@ func intro() string{
   s()
   dashLine()
   s()
-  printSlow("You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open...")
+  printSlow("You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open............................")
   return name
 }
 
