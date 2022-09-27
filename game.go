@@ -294,9 +294,6 @@ func wArea() {
     } else if userchoice == "fish" {
       s()
       printSlow("You say hi to the fish in the pond, but they don't seem interested in being friends.")
-    } else if userchoice == "look" {
-      s()
-      printSlow(description)
     } else if userchoice == "axe" && event["log"] == true {
       i := inv("?")
       // if user has the axe, and the log is still there
@@ -314,6 +311,9 @@ func wArea() {
     } else if userchoice == "axe" && event["log"] == false {
       s()
       printSlow("You already cleared the log, there's no need to use the axe.")
+    } else if userchoice == "look" {
+      s()
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -444,7 +444,7 @@ func sArea() {
   var validDirections = [3]string{"north", "east", "west"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description1 := "This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground\nYou can go north, east, or west."
+  description1 := "This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground.\nYou can go north, east, or west."
   description2 := "This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
 
   i := inv("?")
@@ -455,7 +455,6 @@ func sArea() {
     s()
     printSlow(description1)
   }
-
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
     fmt.Print(" > ")
@@ -566,6 +565,16 @@ func seArea() {
       s()
       printSlow("You go west.")
       sArea()
+    } else if userchoice == "rope" {
+      i := inv("?")
+      if contains("rope", i) {
+        s()
+        printSlow("You use the rope to climb the cliff.")
+        eArea()
+      } else {
+        s()
+        printSlow("What rope?")
+      }
     } else if userchoice == "look" {
       s()
       printSlow(description)
