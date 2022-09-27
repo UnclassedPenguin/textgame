@@ -256,11 +256,24 @@ func wArea() {
     if userchoice == "north" {
       s()
       i := inv("?")
-      if contains("axe", i) {
+      // if user has axe and log is still there
+      if contains("axe", i) && event["log"] == true {
         s()
         printSlow("You use your axe to clear the log and travel north.")
         event["log"] = false
         nwArea()
+        // if user has axe and log is not there
+      } else if contains("axe", i) && event["log"] == false {
+        s()
+        printSlow("You travel north.")
+        nwArea()
+        // if user has already cleared the log, dropped the axe back in startArea 
+        // and comes back. So log not there, and doesn't have axe.
+      } else if event["log"] == false {
+        s()
+        printSlow("You travel north.")
+        nwArea()
+        // if user doesn't have axe and the log is still there
       } else {
         s()
         printSlow("There is a log blocking the way! If only you had a way to clear it...")
@@ -284,6 +297,23 @@ func wArea() {
     } else if userchoice == "look" {
       s()
       printSlow(description)
+    } else if userchoice == "axe" && event["log"] == true {
+      i := inv("?")
+      // if user has the axe, and the log is still there
+      if contains("axe", i){
+        s()
+        printSlow("You use your axe to clear the log and travel north.")
+        event["log"] = false
+        nwArea()
+      // if user doesn't have axe and log is still there
+      } else {
+        s()
+        printSlow("There is a log blocking the way! If only you had a way to clear it...")
+      }
+      // if user already cleared log
+    } else if userchoice == "axe" && event["log"] == false {
+      s()
+      printSlow("You already cleared the log, there's no need to use the axe.")
     } else if userchoice == "inv" {
       s()
       i := inv("?")
