@@ -28,3 +28,5 @@ $ ./game
   - Its luck at the moment. But not bad...
 - Add inventory to an area. So if you pick up the axe in one area and drop it in another, it is in that area. 
   - Turns out this is slightly more complicated than I thought....Not sure at the moment how to implement it.
+- change "please enter a valid option"
+  - maybe "Please try another option, or 'help' if you're not sure"

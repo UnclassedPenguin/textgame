@@ -228,7 +228,7 @@ func startArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option, or try 'help'\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -320,7 +320,7 @@ func wArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -389,7 +389,7 @@ func nwArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -437,7 +437,7 @@ func swArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -511,7 +511,7 @@ func sArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -594,7 +594,7 @@ func seArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -639,7 +639,7 @@ func eArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -707,7 +707,7 @@ func neArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
@@ -804,7 +804,7 @@ func nArea() {
       exit(0)
     } else {
       s()
-      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter a valid option\n")
+      printSlow("I'm sorry I don't understand '" + userchoice + "'. Please enter another option, or try 'help'.\n")
     }
   }
 }
