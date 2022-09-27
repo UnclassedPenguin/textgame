@@ -643,9 +643,16 @@ func neArea() {
   var validDirections = [2]string{"south", "west"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is NE AREA. \nYou can go west or south."
-  s()
-  printSlow(description)
+  description1 := "This is NE AREA. There is a monster blocking your path to the west.\nYou can go west or south."
+  description2 := "This is NE AREA. The monster you have slain is laying to the side of the path heading west.\nYou can go west or south."
+
+  if event["monster"] {
+    s()
+    printSlow(description1)
+  } else {
+    s()
+    printSlow(description2)
+  }
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] {
     fmt.Print(" > ")
@@ -665,9 +672,22 @@ func neArea() {
       } else {
         printSlow("I don't think you can fight the monster without a sword...")
       }
+    } else if userchoice == "sword" {
+      i:= inv("?")
+      if contains("sword", i) {
+        monsterFight()
+      } else {
+        s()
+        printSlow("What sword?")
+      }
     } else if userchoice == "look" {
-      s()
-      printSlow(description)
+      if event["monster"] {
+        s()
+        printSlow(description1)
+      } else {
+        s()
+        printSlow(description2)
+      }
     } else if userchoice == "inv" {
       s()
       i := inv("?")
