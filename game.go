@@ -150,7 +150,6 @@ func intro() string{
   fmt.Println("Author: Tyler(UnclassedPenguin)")
   fmt.Println("Github: https://github.com/UnclassedPenguin/textgame/")
   s()
-  dashLine()
   s()
   printSlow("What's your name?")
   fmt.Print(" > ")
