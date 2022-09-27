@@ -309,6 +309,7 @@ func wArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -374,8 +375,10 @@ func nwArea() {
         printSlow(description1)
       }
     } else if userchoice == "inv" {
+      s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -423,6 +426,7 @@ func swArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -496,6 +500,7 @@ func sArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -578,6 +583,7 @@ func seArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -622,6 +628,7 @@ func eArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -689,6 +696,7 @@ func neArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
@@ -785,6 +793,7 @@ func nArea() {
       s()
       i := inv("?")
       fmt.Println(i)
+      s()
     } else if userchoice == "help" {
       s()
       help()
