@@ -483,7 +483,7 @@ func sArea() {
           inventory = append(inventory[:indexOfRope], inventory[indexOfRope+1:]...)
         }
       } else {
-        printSlow("You pick up the Rope. It seems heavy enough to support your weight.")
+        printSlow("You pick up the rope. It seems heavy enough to support your weight.")
         inv("rope")
       }
     } else if userchoice == "look" {
@@ -717,7 +717,7 @@ func monsterFight() {
     //var stringDamage string
     monsterHealth := 20
     s()
-    printSlow("You're gonna fight the monster")
+    printSlow("You decide to fight the monster.")
 
     for monsterHealth > 0 {
       rn := randNumber(10) + 1
