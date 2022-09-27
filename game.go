@@ -102,9 +102,9 @@ func contains(str string, s []string) bool {
 }
 
 // Get index of item in slice
-func indexOf(element string, data []string) (int) {
-  for k, v := range data {
-    if element == v {
+func indexOf(str string, s []string) (int) {
+  for k, v := range s {
+    if str == v {
       return k
     }
   }
