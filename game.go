@@ -160,7 +160,7 @@ func intro() string{
   s()
   dashLine()
   s()
-  printSlow("You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open............................")
+  printSlow("You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open........")
   return name
 }
 
