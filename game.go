@@ -152,13 +152,15 @@ func intro() string{
   s()
   dashLine()
   s()
-  printSlow("You wake up and become aware. You're not quite sure what happened, and your head\nfeels a bit cloudy. Your eyes slowly start to open...")
-  s()
-  dashLine()
-  s()
   printSlow("What's your name?")
   fmt.Print(" > ")
   fmt.Scan(&name)
+  s()
+  printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.")
+  s()
+  dashLine()
+  s()
+  printSlow("You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open...")
   return name
 }
 
@@ -848,10 +850,6 @@ func main() {
   flag.Parse()
 
   name = intro()
-  s()
-  printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.")
-  s()
-  dashLine()
   s()
   startArea()
 }
