@@ -152,11 +152,11 @@ func intro() string{
   s()
   dashLine()
   s()
-  fmt.Println("This is the intro. It certaintly needs some work...")
+  printSlow("This is the intro. It certaintly needs some work...")
   s()
   dashLine()
   s()
-  fmt.Println("What's your name?")
+  printSlow("What's your name?")
   fmt.Print(" > ")
   fmt.Scan(&name)
   return name
