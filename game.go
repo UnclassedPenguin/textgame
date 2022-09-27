@@ -152,7 +152,7 @@ func intro() string{
   s()
   dashLine()
   s()
-  printSlow("This is the intro. It certaintly needs some work...")
+  printSlow("You wake up and become aware. You're not quite sure what happened, and your head\nfeels a bit cloudy. Your eyes slowly start to open...")
   s()
   dashLine()
   s()
@@ -165,8 +165,8 @@ func intro() string{
 func startArea() {
   var validDirections = [2]string{"south", "west"}
   var userchoice string
-  description1 := "You find yourself in the middle of a forest. There is an axe leaning up against a tree.\nYou can go south or west."
-  description2 := "You find yourself in the middle of a forest.\nYou can go south or west."
+  description1 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through. There is an axe leaning up against a tree.\nYou can go south or west."
+  description2 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through.\nYou can go south or west."
 
   i := inv("?")
   if contains("axe", i) {
@@ -242,9 +242,9 @@ func wArea() {
   var description string
 
   if event["log"] {
-    description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
+    description = "There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
   } else {
-  description = "There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
+    description = "There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
   }
 
   s()
@@ -336,6 +336,7 @@ func nwArea() {
   var userchoice string
   description1 := "There are tall trees all around you. The sun gleams through a few of the trees. Is that something shiny behind that tree? It almost looks like it could be a sword...\nYou can only go south."
   description2 := "There are tall trees all around you. The sun gleams through a few of the trees.\nYou can only go south."
+
   i := inv("?")
   if contains("sword", i) {
     s()
@@ -400,8 +401,9 @@ func nwArea() {
 func swArea() {
   var validDirections = [2]string{"north", "east"}
   var userchoice string
-  //THIS DESCRIPTION NEEDS WORK
-  description := "There is a stream running from the north. The banks are covered in rocks. Don't slip!\nYou can go north or east."
+
+  description := "The forest has cleared here, and there is a stream running from the north. The banks of the stream are covered in rocks. Don't slip!\nYou can go north or east."
+
   s()
   printSlow(description)
 
@@ -420,6 +422,9 @@ func swArea() {
       cantGo()
     } else if userchoice == "west" {
       cantGo()
+    } else if userchoice == "stream" {
+      s()
+      printSlow("You bend down and use your hands to cup some water and drink it.")
     } else if userchoice == "look" {
       s()
       printSlow(description)
@@ -444,8 +449,8 @@ func sArea() {
   var validDirections = [3]string{"north", "east", "west"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description1 := "This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground.\nYou can go north, east, or west."
-  description2 := "This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
+  description1 := "You find yourself in clear grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass\nYou can go north, east, or west."
+  description2 := "You find yourself in clear grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
 
   i := inv("?")
   if contains("rope", i) {
@@ -519,10 +524,12 @@ func sArea() {
 func seArea() {
   var validDirections = [2]string{"north", "west"}
   var userchoice string
+
+  // count for attempts at climbing cliff without rope.
   count := 0
 
-  //THIS DESCRIPTION NEEDS WORK
-  description := "This is SE AREA. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
+  description := "The terrain has turned mountainous. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
+
   s()
   printSlow(description)
 
@@ -575,6 +582,9 @@ func seArea() {
         s()
         printSlow("What rope?")
       }
+    } else if userchoice == "mountain" {
+      s()
+      printSlow("To the east and south are mountains for miles.")
     } else if userchoice == "look" {
       s()
       printSlow(description)
@@ -598,8 +608,9 @@ func seArea() {
 func eArea() {
   var validDirections = [2]string{"north", "south"}
   var userchoice string
-  //THIS DESCRIPTION NEEDS WORK
-  description := "This is E AREA. \nYou can go north or south."
+
+  description := "You are on a high plateau. To the south is a cliff, and further south than that you can see large mountain ranges in the distance. \nYou can go north or south."
+
   s()
   printSlow(description)
 
@@ -638,13 +649,12 @@ func eArea() {
   }
 }
 
-//THIS AREA HAS THE MONSTER. NEED TO WRITE IT OUT
 func neArea() {
   var validDirections = [2]string{"south", "west"}
   var userchoice string
-  //THIS DESCRIPTION NEEDS WORK
-  description1 := "This is NE AREA. There is a monster blocking your path to the west.\nYou can go west or south."
-  description2 := "This is NE AREA. The monster you have slain is laying to the side of the path heading west.\nYou can go west or south."
+
+  description1 := "You enter another forest area. Pines are surrounding you on all sides. There is a path to the west, but when you look closer you see there is a monster standing there, blocking your path. \nYou can go west or south."
+  description2 :="You enter another forest area. Pine trees are surrounding you on all sides. The monster you have slain is laying to the side of the path heading west.\nYou can go west or south."
 
   if event["monster"] {
     s()
@@ -730,15 +740,17 @@ func monsterFight() {
         monsterHealth -= damage
         s()
         printSlow("You deal " + strconv.Itoa(damage) + " damage to the monster.")
-        fmt.Println("--------diag---------------")
-        fmt.Println("Random Number:", rn)
-        fmt.Println("User choice:", userchoice)
-        fmt.Println("Damage:", damage)
-        fmt.Println("Monster Health:", monsterHealth)
-        fmt.Println("--------diag---------------")
+        //fmt.Println("--------diag---------------")
+        //fmt.Println("Random Number:", rn)
+        //fmt.Println("User choice:", userchoice)
+        //fmt.Println("Damage:", damage)
+        //fmt.Println("Monster Health:", monsterHealth)
+        //fmt.Println("--------diag---------------")
         if monsterHealth <= 0 {
           s()
           printSlow("You Defeated the monster!")
+          s()
+          printSlow("You go west.")
           event["monster"] = false
           nArea()
         }
@@ -748,7 +760,8 @@ func monsterFight() {
       }
     }
   } else {
-    printSlow("You go west")
+    s()
+    printSlow("You go west.")
     nArea()
   }
 }
@@ -757,7 +770,7 @@ func nArea() {
   var validDirections = [2]string{"north", "east"}
   var userchoice string
   //THIS DESCRIPTION NEEDS WORK
-  description := "This is N AREA. \nYou can go north or east."
+  description := "The forest clears and you find yourself in a field of wildflowers. Purple, blue, yellow and red as far as the eye can see. \nYou can go north or east."
   s()
   printSlow(description)
 
@@ -776,6 +789,9 @@ func nArea() {
       cantGo()
     } else if userchoice == "west" {
       cantGo()
+    } else if userchoice == "flower" {
+      s()
+      printSlow("You pick a flower and smell it.")
     } else if userchoice == "look" {
       s()
       printSlow(description)
@@ -799,8 +815,8 @@ func nArea() {
 func exitArea() {
   s()
   printSlow("Congratulations, " + name + "!")
-  printSlow("YOU WIIIIIINNNNNNN!")
-  printSlow("Hope you had fun! Bye!")
+  printSlow("You win!")
+  printSlow("Hope you had fun!")
   exit(0)
 }
 

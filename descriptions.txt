@@ -1,21 +1,21 @@
 intro
 ---------------------------------------------------------------------
-This is the intro. It certaintly needs some work...
+You wake up and become aware. You're not quite sure what happened, and your head feels a bit cloudy. Your eyes slowly start to open...
 ---------------------------------------------------------------------
 
 startArea
 ---------------------------------------------------------------------
 Item:
-axe
+  axe: "You pick up the axe. It's a nice heavey American felling axe."
 
 look at:
 n/a(yet)
 
 description1:
-"You find yourself in the middle of a forest. There is an axe leaning up against a tree.\nYou can go south or west."
+"You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through. There is an axe leaning up against a tree.\nYou can go south or west."
 
 description2:
-"You find yourself in the middle of a forest.\nYou can go south or west."
+"You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through.\nYou can go south or west."
 
 ---------------------------------------------------------------------
 
@@ -28,19 +28,18 @@ look at:
   pond: "You look in the pond. There are some small fish swimming around." 
   fish: "You say hi to the fish in the pond, but they don't seem interested in being friends."
 
-
 description1:
-"There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
+"There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
 
 description2:
-"There is a small pond here, fed by a natural spring, with a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
+"There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
 
 ---------------------------------------------------------------------
 
 nwArea
 ---------------------------------------------------------------------
 item:
-sword
+  sword: "You go and look behind the trees. Sure enough, there is a long sword laying in the grass. Who would have dropped this?! You pick it up."
 
 look at:
 
@@ -57,9 +56,10 @@ swArea
 item:
 
 look at:
+  stream: "You bend down and use your hands to cup some water and drink it."
 
 description1:
-"There is a stream running from the north. The banks are covered in rocks. Don't slip!\nYou can go north or east."
+"The forest clears here, and there is a stream running from the north. The banks of the stream are covered in rocks. Don't slip!\nYou can go north or east."
 
 description2:
 
@@ -73,10 +73,10 @@ rope
 look at:
 
 description1:
-"This is a smelly area. Don't breath too deep! It looks like there is a rope on the ground\nYou can go north, east, or west."
+"You find yourself in clear grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass\nYou can go north, east, or west."
 
 description2:
-"This is a smelly area. Don't breath too deep!\nYou can go north, east, or west."
+"You find yourself in clear grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
 
 ---------------------------------------------------------------------
 
@@ -85,9 +85,10 @@ seArea
 item:
 
 look at:
+  mountain: "To the east and south are mountains for miles."
 
 description1:
-"This is SE AREA. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
+"The terrain has turned mountainous. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
 
 description2:
 
@@ -100,7 +101,7 @@ item:
 look at:
 
 description1:
-"This is E AREA. \nYou can go north or south."
+"You are on a high plateau. To the south is a cliff, and further south than that you can see large mountain ranges in the distance. \nYou can go north or south."
 
 description2:
 
@@ -113,9 +114,10 @@ item:
 look at:
 
 description1:
-"This is NE AREA. \nYou can go west or south."
+"You enter another forest area. Pines are surrounding you on all sides. There is a path to the west, but when you look closer you see there is a monster standing there, blocking your path. \nYou can go west or south."
 
 description2:
+"You enter another forest area. Pine trees are surrounding you on all sides. The monster you have slain is laying to the side of the path heading west.\nYou can go west or south."
 
 ---------------------------------------------------------------------
 
@@ -128,9 +130,10 @@ nArea
 item:
 
 look at:
+  flower: "You pick a flower and smell it."
 
 description1:
-"This is N AREA. \nYou can go north or east."
+"The forest clears and you find yourself in a field of wildflowers. Purple, blue, yellow and red as far as the eye can see. \nYou can go north or east."
 
 description2:
 
