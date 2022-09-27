@@ -31,7 +31,7 @@ func help() {
   dashLine()
   fmt.Println("Help: ")
   fmt.Println("To move a direction, simply type the direction you want to go.")
-  fmt.Println("       i.e.(north, south, east, or west)"
+  fmt.Println("       i.e.(north, south, east, or west)")
   fmt.Println("If there is an item, just try typing its name to pick it up.")
   fmt.Println("Type 'inv' to check whats in your inventory.")
   fmt.Println("Type 'look' to check your surroundings.")
