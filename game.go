@@ -670,6 +670,7 @@ func neArea() {
       if contains("sword", i) {
         monsterFight()
       } else {
+        s()
         printSlow("I don't think you can fight the monster without a sword...")
       }
     } else if userchoice == "sword" {
