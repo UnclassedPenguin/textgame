@@ -22,6 +22,7 @@ $ ./game
 - Intro
 - ~~Add the rope item~~
 - Make inventory a little prettier instead of just printint out an array ha. 
+  - Have it say something if inventory is empty. Ie "Your inventory appears to be empty" or "Doesn't seem to be anything in your inventory"
 - IMPORTANT!! Continue work on area descriptions
 - Need to come up with a mini game for fighting the monster...skill, or luck?
   - Its luck at the moment. But not bad...
