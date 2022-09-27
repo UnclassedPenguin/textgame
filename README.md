@@ -30,3 +30,4 @@ $ ./game
   - Turns out this is slightly more complicated than I thought....Not sure at the moment how to implement it.
 - ~~Change "please enter a valid option"~~
   - ~~maybe "Please try another option, or 'help' if you're not sure"~~
+- Go through and format(clear unnecessary whitespace etc.) and comment code.
