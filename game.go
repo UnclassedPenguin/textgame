@@ -170,10 +170,8 @@ func startArea() {
 
   i := inv("?")
   if contains("axe", i) {
-    s()
     printSlow(description2)
   } else {
-    s()
     printSlow(description1)
   }
 
@@ -202,7 +200,6 @@ func startArea() {
           inventory = append(inventory[:indexOfAxe], inventory[indexOfAxe+1:]...)
         }
       } else {
-        s()
         printSlow("You pick up the axe. It's a nice heavy American felling axe.")
         inv("axe")
       }
@@ -212,10 +209,8 @@ func startArea() {
       // Otherwise prints the description that mentions the axe
       i := inv("?")
       if contains("axe", i) {
-      s()
         printSlow(description2)
       } else {
-      s()
         printSlow(description1)
       }
     } else if userchoice == "inv" {
@@ -258,24 +253,20 @@ func wArea() {
       i := inv("?")
       // if user has axe and log is still there
       if contains("axe", i) && event["log"] == true {
-        s()
         printSlow("You use your axe to clear the log and travel north.")
         event["log"] = false
         nwArea()
         // if user has axe and log is not there
       } else if contains("axe", i) && event["log"] == false {
-        s()
         printSlow("You travel north.")
         nwArea()
         // if user has already cleared the log, dropped the axe back in startArea 
         // and comes back. So log not there, and doesn't have axe.
       } else if event["log"] == false {
-        s()
         printSlow("You travel north.")
         nwArea()
         // if user doesn't have axe and the log is still there
       } else {
-        s()
         printSlow("There is a log blocking the way! If only you had a way to clear it...")
       }
     } else if userchoice == "east" {
@@ -355,7 +346,7 @@ func nwArea() {
       cantGo()
     } else if userchoice == "south" {
       s()
-      printSlow("You go south")
+      printSlow("You go south.")
       wArea()
     } else if userchoice == "west" {
       cantGo()
@@ -482,13 +473,12 @@ func sArea() {
       s()
       i := inv("?")
       if contains("rope", i) {
-        printSlow("You drop the rope")
+        printSlow("You drop the rope.")
         indexOfRope := indexOf("rope", inventory)
         if indexOfRope != -1 {
           inventory = append(inventory[:indexOfRope], inventory[indexOfRope+1:]...)
         }
       } else {
-        s()
         printSlow("You pick up the Rope. It seems heavy enough to support your weight.")
         inv("rope")
       }
@@ -498,10 +488,8 @@ func sArea() {
       // Otherwise prints the description that mentions the rope
       i := inv("?")
       if contains("rope", i) {
-      s()
         printSlow(description2)
       } else {
-      s()
         printSlow(description1)
       }
     } else if userchoice == "inv" {
@@ -541,13 +529,11 @@ func seArea() {
       i := inv("?")
       // If you have the rope, you are guaranteed to climb the cliff. 
       if contains("rope", i) {
-        s()
         printSlow("You use the rope to climb the cliff.")
         eArea()
       // This is if you don't have a rope. Gives you a small change of
       // climbing the cliff. Currently 1/20 chance. Too small? Too big? 
       } else {
-        s()
         if count < 5 {
           printSlow("You decide to try free climbing the cliff...")
           s()
@@ -854,6 +840,9 @@ func main() {
 
   name = intro()
   s()
-  printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.\n")
+  printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.")
+  s()
+  dashLine()
+  s()
   startArea()
 }
