@@ -26,7 +26,7 @@ n/a(yet)
 
 look at: 
   pond: "You look in the pond. There are some small fish swimming around." 
-  fish: "You say hi to the fish, but they don't seem interested in being friends."
+  fish: "You say hi to the fish in the pond, but they don't seem interested in being friends."
 
 
 description1:

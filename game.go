@@ -249,7 +249,6 @@ func wArea() {
 
   s()
   printSlow(description)
-  pond := false
 
   for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
     fmt.Print(" > ")
@@ -278,16 +277,10 @@ func wArea() {
       cantGo()
     } else if userchoice == "pond" {
       s()
-      pond = true
       printSlow("You look in the pond. There are some small fish swimming around.")
     } else if userchoice == "fish" {
-      if pond == true {
-        s()
-        printSlow("You say hi to the fish, but they don't seem interested in being friends.")
-      } else {
-        s()
-        printSlow("I'm sorry I don't understand 'fish'. Please enter a valid option, or try 'help'")
-      }
+      s()
+      printSlow("You say hi to the fish in the pond, but they don't seem interested in being friends.")
     } else if userchoice == "look" {
       s()
       printSlow(description)
