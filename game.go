@@ -138,6 +138,7 @@ func s() {
 }
 
 func exit(i int) {
+  s()
   fmt.Println("Thanks For Playing!")
   os.Exit(i)
 }
@@ -164,6 +165,9 @@ func intro() string{
   printSlow("What's your name?")
   fmt.Print(" > ")
   fmt.Scan(&name)
+  if name == "exit" {
+    exit(0)
+  }
   s()
   printSlow("Hope you enjoy the game, " + name + ". Good luck!\nIf you get stuck, try 'help'.")
   s()
@@ -313,7 +317,6 @@ func startArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -501,7 +504,6 @@ func wArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -649,7 +651,6 @@ func nwArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -802,7 +803,6 @@ func swArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -954,7 +954,6 @@ func sArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -1132,7 +1131,6 @@ func seArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -1283,7 +1281,6 @@ func eArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -1454,7 +1451,6 @@ func neArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
@@ -1658,7 +1654,6 @@ func nArea() {
       s()
       help()
     } else if userchoice == "exit" {
-      s()
       exit(0)
     } else {
       s()
