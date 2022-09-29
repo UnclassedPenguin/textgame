@@ -111,6 +111,15 @@ func indexOf(str string, s []string) (int) {
   return -1    //not found.
 }
 
+// Diagnostics thing to check value of area inv variables
+func checkLocalItems(axe bool, sword bool, rope bool) {
+  fmt.Println("-----------------------------")
+  fmt.Println("   Axe : ", axe)
+  fmt.Println(" Sword : ", sword)
+  fmt.Println("  Rope : ", rope)
+  fmt.Println("-----------------------------")
+}
+
 // Just prints a separator
 func dashLine() {
   fmt.Println("--------------------------------------------------------------------------------")
@@ -164,20 +173,43 @@ func intro() string{
   return name
 }
 
+
 func startArea() {
   // validDirections = south, west
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description1 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through. There is an axe leaning up against a tree.\nYou can go south or west."
-  description2 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through.\nYou can go south or west."
+  baseDescription = "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through."
 
-  i := inv("?")
-  if contains("axe", i) {
-    printSlow(description2)
+  if startAxe {
+    axeDescription = " You see an axe leaning up against a tree."
   } else {
-    printSlow(description1)
+    axeDescription = ""
   }
+
+  if startSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if startRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "You can go south or west."
+
+  description = baseDescription + axeDescription + swordDescription + ropeDescription + "\n" + directions
+
+  printSlow(description)
 
   for true {
     fmt.Print(" > ")
@@ -198,25 +230,80 @@ func startArea() {
       s()
       i := inv("?")
       if contains("axe", i) {
+        startAxe = true
         printSlow("You drop the axe.")
-        indexOfAxe := indexOf("axe", inventory)
-        if indexOfAxe != -1 {
-          inventory = append(inventory[:indexOfAxe], inventory[indexOfAxe+1:]...)
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
         }
-      } else {
+      } else if startAxe {
+        startAxe = false
         printSlow("You pick up the axe. It's a nice heavy American felling axe.")
         inv("axe")
-      }
-    } else if userchoice == "look" {
-      s()
-      // Checks inventory, if you have axe in your inventory prints description without axe. 
-      // Otherwise prints the description that mentions the axe
-      i := inv("?")
-      if contains("axe", i) {
-        printSlow(description2)
       } else {
-        printSlow(description1)
+        printSlow("What axe?")
       }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        startSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if startSword {
+        startSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        startRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if startRope {
+        startRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(startAxe, startSword, startRope)
+    } else if userchoice == "look" {
+      if startAxe {
+        axeDescription = "You see an axe leaning up against a tree."
+      } else {
+        axeDescription = ""
+      }
+
+      if startSword {
+        swordDescription = "You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if startRope {
+        ropeDescription = "You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions := "You can go south or west."
+
+      description := baseDescription + axeDescription + swordDescription + ropeDescription + "\n" + directions
+
+      s()
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -235,17 +322,48 @@ func startArea() {
   }
 }
 
+
 func wArea() {
-  // validDirections = south, east, south
+  // validDirections = north, east, south
 
   var userchoice string
   var description string
+  var baseDescription string
+  var eventLog string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
+
+  baseDescription = "There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south."
 
   if event["log"] {
-    description = "There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north it looks like there is a path, but with a large log blocking the way.\nYou can go east or south."
+    eventLog = " To the north it looks like there is a path, but with a large log blocking the way."
   } else {
-    description = "There is a little clearing in the trees here with a small pond, fed by a natural spring, which has a stream leading out of it to the south.  To the north there is a path you cleared, with a large log split in half on either side.\nYou can go north, east or south."
+    eventLog = " To the north there is a path you cleared, with a large log split in half on either side."
   }
+
+  if wAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if wSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if wRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go north, east, or south."
+
+  description = baseDescription + eventLog + axeDescription + swordDescription + ropeDescription + directions
 
   s()
   printSlow(description)
@@ -256,7 +374,7 @@ func wArea() {
     if userchoice == "north" {
       s()
       i := inv("?")
-      // if user has axe and log is still there
+        // if user has axe and log is still there
       if contains("axe", i) && event["log"] == true {
         printSlow("You use your axe to clear the log and travel north.")
         event["log"] = false
@@ -290,24 +408,88 @@ func wArea() {
     } else if userchoice == "fish" {
       s()
       printSlow("You say hi to the fish in the pond, but they don't seem interested in being friends.")
-    } else if userchoice == "axe" && event["log"] == true {
+    } else if userchoice == "axe" {
+      s()
       i := inv("?")
-      // if user has the axe, and the log is still there
-      if contains("axe", i){
-        s()
-        printSlow("You use your axe to clear the log and travel north.")
-        event["log"] = false
-        nwArea()
-      // if user doesn't have axe and log is still there
+      if contains("axe", i) {
+        wAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if wAxe {
+        wAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
       } else {
-        s()
         printSlow("What axe?")
       }
-      // if user already cleared log
-    } else if userchoice == "axe" && event["log"] == false {
+    } else if userchoice == "sword" {
       s()
-      printSlow("You already cleared the log, there's no need to use the axe.")
+      i := inv("?")
+      if contains("sword", i) {
+        wSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if wSword {
+        wSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        wRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if wRope {
+        wRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(wAxe, wSword, wRope)
     } else if userchoice == "look" {
+      if event["log"] {
+        eventLog = " To the north it looks like there is a path, but with a large log blocking the way."
+      } else {
+        eventLog = " To the north there is a path you cleared, with a large log split in half on either side."
+      }
+
+      if wAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if wSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if wRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go north, east, or south."
+
+      description = baseDescription + eventLog + axeDescription + swordDescription + ropeDescription + directions
+
       s()
       printSlow(description)
     } else if userchoice == "inv" {
@@ -328,22 +510,44 @@ func wArea() {
   }
 }
 
+
 func nwArea() {
   // validDirections = south, west
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description1 := "There are tall trees all around you. The sun gleams through a few of the trees. Is that something shiny behind that tree? It almost looks like it could be a sword...\nYou can only go south."
-  description2 := "There are tall trees all around you. The sun gleams through a few of the trees.\nYou can only go south."
+  baseDescription = "There are tall trees all around you. The sun gleams through a few of the trees."
 
-  i := inv("?")
-  if contains("sword", i) {
-    s()
-    printSlow(description2)
+  if nwAxe {
+    axeDescription = " You see an axe lying on the ground."
   } else {
-    s()
-    printSlow(description1)
+    axeDescription = ""
   }
+
+  if nwSword {
+    swordDescription = " Is that something shiny behind that tree? It almost looks like it could be a sword..."
+  } else {
+    swordDescription = ""
+  }
+
+  if nwRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can only go south."
+
+  description = baseDescription + swordDescription + axeDescription + ropeDescription + directions
+
+  s()
+  printSlow(description)
 
   for true {
     fmt.Print(" > ")
@@ -358,29 +562,84 @@ func nwArea() {
       wArea()
     } else if userchoice == "west" {
       cantGo()
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        nwAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if nwAxe {
+        nwAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
     } else if userchoice == "sword" {
+      s()
       i := inv("?")
       if contains("sword", i) {
-        s()
+        nwSword = true
         printSlow("You drop the sword, but why would you want to do that?")
-        indexOfSword := indexOf("sword", inventory)
-        if indexOfSword != -1 {
-          inventory = append(inventory[:indexOfSword], inventory[indexOfSword+1:]...)
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
         }
-      } else {
-        s()
+      } else if nwSword {
+        nwSword = false
         printSlow("You go and look behind the trees. Sure enough, there is a long sword laying in the grass. Who would have dropped this?! You pick it up.")
         inv("sword")
-      }
-    } else if userchoice == "look" {
-      i := inv("?")
-      if contains("sword", i) {
-        s()
-        printSlow(description2)
       } else {
-        s()
-        printSlow(description1)
+        printSlow("What sword?")
       }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        nwRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if nwRope {
+        nwRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(nwAxe, nwSword, nwRope)
+    } else if userchoice == "look" {
+      if nwAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if nwSword {
+        swordDescription = " Is that something shiny behind that tree? It almost looks like it could be a sword..."
+      } else {
+        swordDescription = ""
+      }
+
+      if nwRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can only go south."
+
+      description = baseDescription + swordDescription + axeDescription + ropeDescription + directions
+
+      s()
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -399,12 +658,41 @@ func nwArea() {
   }
 }
 
+
 func swArea() {
   // validDirections = north, east
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description := "The forest has cleared here, and there is a stream running from the north. The banks of the stream are covered in rocks. Don't slip!\nYou can go north or east."
+  baseDescription = "The forest has cleared here, and there is a stream running from the north. The banks of the stream are covered in rocks. Don't slip!"
+
+  if swAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if swSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if swRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go north or east."
+
+  description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
 
   s()
   printSlow(description)
@@ -427,7 +715,82 @@ func swArea() {
     } else if userchoice == "stream" {
       s()
       printSlow("You bend down and use your hands to cup some water and drink it.")
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        swAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if swAxe {
+        swAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        swSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if swSword {
+        swSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        swRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if swRope {
+        swRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(swAxe, swSword, swRope)
     } else if userchoice == "look" {
+      if swAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if swSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if swRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go north or east."
+
+      description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
+
       s()
       printSlow(description)
     } else if userchoice == "inv" {
@@ -448,22 +811,44 @@ func swArea() {
   }
 }
 
+
 func sArea() {
   // validDirections = north, east, west
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description1 := "You find yourself in open grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass.\nYou can go north, east, or west."
-  description2 := "You find yourself in open grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
+  baseDescription = "You find yourself in open grasslands. The land starts to rise gently to the east, with mountains in the distance."
 
-  i := inv("?")
-  if contains("rope", i) {
-    s()
-    printSlow(description2)
+  if sAxe {
+    axeDescription = " You see an axe lying on the ground."
   } else {
-    s()
-    printSlow(description1)
+    axeDescription = ""
   }
+
+  if sSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if sRope {
+    ropeDescription = " It looks like there is a rope laying in the grass."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go north, east, or west."
+
+  description = baseDescription + ropeDescription + axeDescription + swordDescription + directions
+
+  s()
+  printSlow(description)
 
   for true {
     fmt.Print(" > ")
@@ -482,29 +867,84 @@ func sArea() {
       s()
       printSlow("You go west.")
       swArea()
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        sAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if sAxe {
+        sAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        sSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if sSword {
+        sSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
     } else if userchoice == "rope" {
       s()
       i := inv("?")
       if contains("rope", i) {
+        sRope = true
         printSlow("You drop the rope.")
-        indexOfRope := indexOf("rope", inventory)
-        if indexOfRope != -1 {
-          inventory = append(inventory[:indexOfRope], inventory[indexOfRope+1:]...)
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
         }
-      } else {
-        printSlow("You pick up the rope. It seems heavy enough to support your weight.")
+      } else if sRope {
+        sRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
         inv("rope")
-      }
-    } else if userchoice == "look" {
-      s()
-      // Checks inventory, if you have rope in your inventory prints description without rope. 
-      // Otherwise prints the description that mentions the rope
-      i := inv("?")
-      if contains("rope", i) {
-        printSlow(description2)
       } else {
-        printSlow(description1)
+        printSlow("What rope?")
       }
+    } else if userchoice == "?" {
+      checkLocalItems(sAxe, sSword, sRope)
+    } else if userchoice == "look" {
+      if sAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if sSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if sRope {
+        ropeDescription = " It looks like there is a rope laying in the grass."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go north, east, or west."
+
+      description = baseDescription + ropeDescription + axeDescription + swordDescription + directions
+
+      s()
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -523,6 +963,7 @@ func sArea() {
   }
 }
 
+
 func seArea() {
   // validDirections = north, west
 
@@ -530,8 +971,36 @@ func seArea() {
   count := 0
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description := "The terrain has turned mountainous. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
+  baseDescription = "The terrain has turned mountainous. There is a cliff to the north. You *might* be able to climb it..."
+
+  if seAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if seSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if seRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go west."
+
+  description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
 
   s()
   printSlow(description)
@@ -573,20 +1042,85 @@ func seArea() {
       s()
       printSlow("You go west.")
       sArea()
-    } else if userchoice == "rope" {
-      i := inv("?")
-      if contains("rope", i) {
-        s()
-        printSlow("You use the rope to climb the cliff.")
-        eArea()
-      } else {
-        s()
-        printSlow("What rope?")
-      }
     } else if userchoice == "mountain" {
       s()
       printSlow("To the east and south are mountains for miles.")
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        seAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if seAxe {
+        seAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        seSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if seSword {
+        seSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        seRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if seRope {
+        seRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(seAxe, seSword, seRope)
     } else if userchoice == "look" {
+      if seAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if seSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if seRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go west."
+
+      description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
+
       s()
       printSlow(description)
     } else if userchoice == "inv" {
@@ -607,12 +1141,41 @@ func seArea() {
   }
 }
 
+
 func eArea() {
   // validDirections = north, south
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description := "You are on a high plateau. To the south is a cliff, and further south than that you can see large mountain ranges in the distance. \nYou can go north or south."
+  baseDescription = "You are on a high plateau. To the south is a cliff, and further south than that you can see large mountain ranges in the distance."
+
+  if eAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if eSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if eRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go north or south"
+
+  description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
 
   s()
   printSlow(description)
@@ -632,7 +1195,83 @@ func eArea() {
       seArea()
     } else if userchoice == "west" {
       cantGo()
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        eAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if eAxe {
+        eAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        eSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if eSword {
+        eSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        eRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if eRope {
+        eRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(eAxe, eSword, eRope)
     } else if userchoice == "look" {
+
+      if eAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if eSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if eRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go north or south"
+
+      description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
+
       s()
       printSlow(description)
     } else if userchoice == "inv" {
@@ -653,21 +1292,51 @@ func eArea() {
   }
 }
 
+
 func neArea() {
   // validDirections = south, west
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var eventMonster string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description1 := "You enter another forest area. Pines are surrounding you on all sides. There is a path to the west, but when you look closer you see there is a monster standing there, blocking your path. \nYou can go west or south."
-  description2 :="You enter another forest area. Pine trees are surrounding you on all sides. The monster you have slain is laying to the side of the path heading west.\nYou can go west or south."
+  baseDescription = "You enter another forest area. Pines are surrounding you on all sides. There is a path to the west."
 
   if event["monster"] {
-    s()
-    printSlow(description1)
+    eventMonster = " When you look closer you see there is a monster standing there, blocking your path."
   } else {
-    s()
-    printSlow(description2)
+    eventMonster = " The monster you have slain is laying to the side of the path heading west."
   }
+
+  if neAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if neSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if neRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go west or south."
+
+  description = baseDescription + eventMonster + axeDescription + swordDescription + ropeDescription + directions
+
+  s()
+  printSlow(description)
 
   for true {
     fmt.Print(" > ")
@@ -682,28 +1351,100 @@ func neArea() {
       eArea()
     } else if userchoice == "west" {
       i := inv("?")
-      if contains("sword", i) {
+      if contains("sword", i) && event["monster"] {
         monsterFight()
-      } else {
+      } else if event["monster"]{
         s()
         printSlow("I don't think you can fight the monster without a sword...")
+      } else {
+        s()
+        printSlow("You go west.")
+        nArea()
+      }
+    } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        neAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if neAxe {
+        neAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
       }
     } else if userchoice == "sword" {
-      i:= inv("?")
+      s()
+      i := inv("?")
       if contains("sword", i) {
-        monsterFight()
+        neSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if neSword {
+        neSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
       } else {
-        s()
         printSlow("What sword?")
       }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        neRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if neRope {
+        neRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(neAxe, neSword, neRope)
     } else if userchoice == "look" {
       if event["monster"] {
-        s()
-        printSlow(description1)
+        eventMonster = "When you look closer you see there is a monster standing there, blocking your path."
       } else {
-        s()
-        printSlow(description2)
+        eventMonster = "The monster you have slain is laying to the side of the path heading west."
       }
+
+      if neAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if neSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if neRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go west or south."
+
+      description = baseDescription + eventMonster + axeDescription + swordDescription + ropeDescription + directions
+
+      s()
+      printSlow(description)
     } else if userchoice == "inv" {
       s()
       i := inv("?")
@@ -721,6 +1462,7 @@ func neArea() {
     }
   }
 }
+
 
 func monsterFight() {
   if event["monster"] {
@@ -772,12 +1514,41 @@ func monsterFight() {
   }
 }
 
+
 func nArea() {
   // validDirections = north, east
 
   var userchoice string
+  var description string
+  var baseDescription string
+  var axeDescription string
+  var swordDescription string
+  var ropeDescription string
+  var directions string
 
-  description := "The forest clears and you find yourself in a field of wildflowers. Purple, blue, yellow and red as far as the eye can see. \nYou can go north or east."
+  baseDescription = "The forest clears and you find yourself in a field of wildflowers. Purple, blue, yellow and red as far as the eye can see."
+
+  if nAxe {
+    axeDescription = " You see an axe lying on the ground."
+  } else {
+    axeDescription = ""
+  }
+
+  if nSword {
+    swordDescription = " You see a sword lying on the ground."
+  } else {
+    swordDescription = ""
+  }
+
+  if nRope {
+    ropeDescription = " You see a rope lying on the ground."
+  } else {
+    ropeDescription = ""
+  }
+
+  directions = "\nYou can go north or east."
+
+  description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
 
   s()
   printSlow(description)
@@ -800,7 +1571,82 @@ func nArea() {
     } else if userchoice == "flower" {
       s()
       printSlow("You pick a flower and smell it.")
+   } else if userchoice == "axe" {
+      s()
+      i := inv("?")
+      if contains("axe", i) {
+        nAxe = true
+        printSlow("You drop the axe.")
+        indexOfItem := indexOf("axe", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if nAxe {
+        nAxe = false
+        printSlow("You pick up the axe. It's a nice heavy American felling axe.")
+        inv("axe")
+      } else {
+        printSlow("What axe?")
+      }
+    } else if userchoice == "sword" {
+      s()
+      i := inv("?")
+      if contains("sword", i) {
+        nSword = true
+        printSlow("You drop the sword.")
+        indexOfItem := indexOf("sword", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if nSword {
+        nSword = false
+        printSlow("You pick up the sword. It's a long sword.")
+        inv("sword")
+      } else {
+        printSlow("What sword?")
+      }
+    } else if userchoice == "rope" {
+      s()
+      i := inv("?")
+      if contains("rope", i) {
+        nRope = true
+        printSlow("You drop the rope.")
+        indexOfItem := indexOf("rope", inventory)
+        if indexOfItem != -1 {
+          inventory = append(inventory[:indexOfItem], inventory[indexOfItem+1:]...)
+        }
+      } else if nRope {
+        nRope = false
+        printSlow("You pick up the rope. It looks heavy enough to hold your weight.")
+        inv("rope")
+      } else {
+        printSlow("What rope?")
+      }
+    } else if userchoice == "?" {
+      checkLocalItems(nAxe, nSword, nRope)
     } else if userchoice == "look" {
+      if nAxe {
+        axeDescription = " You see an axe lying on the ground."
+      } else {
+        axeDescription = ""
+      }
+
+      if nSword {
+        swordDescription = " You see a sword lying on the ground."
+      } else {
+        swordDescription = ""
+      }
+
+      if nRope {
+        ropeDescription = " You see a rope lying on the ground."
+      } else {
+        ropeDescription = ""
+      }
+
+      directions = "\nYou can go north or east."
+
+      description = baseDescription + axeDescription + swordDescription + ropeDescription + directions
+
       s()
       printSlow(description)
     } else if userchoice == "inv" {
@@ -821,6 +1667,7 @@ func nArea() {
   }
 }
 
+
 func exitArea() {
   s()
   printSlow("Congratulations, " + name + "!")
@@ -839,11 +1686,44 @@ func exitArea() {
 // Global variables start
 //-----------------------------------------------------------------------------
 
+// Users name
 var name string
+
+// slowMode is a cmd line flag to either print normally, or if true it prints 
+// character by character.
 var slowMode bool
 
 // Global inventory
 var inventory = []string{}
+
+// Areas inventory
+var startAxe bool
+var startSword bool
+var startRope bool
+var wAxe bool
+var wSword bool
+var wRope bool
+var nwAxe bool
+var nwSword bool
+var nwRope bool
+var swAxe bool
+var swSword bool
+var swRope bool
+var sAxe bool
+var sSword bool
+var sRope bool
+var seAxe bool
+var seSword bool
+var seRope bool
+var eAxe bool
+var eSword bool
+var eRope bool
+var neAxe bool
+var neSword bool
+var neRope bool
+var nAxe bool
+var nSword bool
+var nRope bool
 
 // Global event tracker
 // ask, Does it exist? if so, true. 
@@ -860,6 +1740,35 @@ func main() {
 
   flag.BoolVar(&slowMode, "s", false, "Print out the text in slow mode")
   flag.Parse()
+
+  // Initial value of area inventories
+  startAxe = true //startArea has axe to start
+  startSword = false
+  startRope = false
+  wAxe = false
+  wSword = false
+  wRope = false
+  nwAxe = false
+  nwSword = true // nwArea has sword to start
+  nwRope = false
+  swAxe = false
+  swSword = false
+  swRope = false
+  sAxe = false
+  sSword = false
+  sRope = true // sArea has rope to start
+  seAxe = false
+  seSword = false
+  seRope = false
+  eAxe = false
+  eSword = false
+  eRope = false
+  neAxe = false
+  neSword = false
+  neRope = false
+  nAxe = false
+  nSword = false
+  nRope = false
 
   name = intro()
   s()
