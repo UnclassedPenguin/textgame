@@ -26,8 +26,9 @@ $ ./game
 - Continue work on area descriptions. Could be more descriptive/better written.
 - Need to come up with a mini game for fighting the monster...skill, or luck?
   - Its luck at the moment. But not bad...
-- Add inventory to an area. So if you pick up the axe in one area and drop it in another, it is in that area. 
-  - Turns out this is slightly more complicated than I thought....Not sure at the moment how to implement it.
+- ~~Add inventory to an area. So if you pick up the axe in one area and drop it in another, it is in that area.~~ 
+  - ~~Turns out this is slightly more complicated than I thought....Not sure at the moment how to implement it.~~
+  - (I was able to do this. Its maybe a bit more complicated than it needed to be. With a whole bunch of global variables. But it works...)
 - ~~Change "please enter a valid option"~~
   - ~~maybe "Please try another option, or 'help' if you're not sure"~~
 - Go through and format(clear unnecessary whitespace etc.) and comment code.
