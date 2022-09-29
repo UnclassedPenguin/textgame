@@ -165,8 +165,10 @@ func intro() string{
 }
 
 func startArea() {
-  var validDirections = [2]string{"south", "west"}
+  // validDirections = south, west
+
   var userchoice string
+
   description1 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through. There is an axe leaning up against a tree.\nYou can go south or west."
   description2 := "You find yourself in the middle of a forest. The trees surrounding you are tall and the canopy is thick, blocking nearly all the sunlight from coming through.\nYou can go south or west."
 
@@ -177,7 +179,7 @@ func startArea() {
     printSlow(description1)
   }
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -234,7 +236,8 @@ func startArea() {
 }
 
 func wArea() {
-  var validDirections = [3]string{"south", "east", "south"}
+  // validDirections = south, east, south
+
   var userchoice string
   var description string
 
@@ -247,7 +250,7 @@ func wArea() {
   s()
   printSlow(description)
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -326,8 +329,10 @@ func wArea() {
 }
 
 func nwArea() {
-  var validDirections = [2]string{"south", "west"}
+  // validDirections = south, west
+
   var userchoice string
+
   description1 := "There are tall trees all around you. The sun gleams through a few of the trees. Is that something shiny behind that tree? It almost looks like it could be a sword...\nYou can only go south."
   description2 := "There are tall trees all around you. The sun gleams through a few of the trees.\nYou can only go south."
 
@@ -340,7 +345,7 @@ func nwArea() {
     printSlow(description1)
   }
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -395,7 +400,8 @@ func nwArea() {
 }
 
 func swArea() {
-  var validDirections = [2]string{"north", "east"}
+  // validDirections = north, east
+
   var userchoice string
 
   description := "The forest has cleared here, and there is a stream running from the north. The banks of the stream are covered in rocks. Don't slip!\nYou can go north or east."
@@ -403,7 +409,7 @@ func swArea() {
   s()
   printSlow(description)
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -443,10 +449,11 @@ func swArea() {
 }
 
 func sArea() {
-  var validDirections = [3]string{"north", "east", "west"}
+  // validDirections = north, east, west
+
   var userchoice string
-  //THIS DESCRIPTION NEEDS WORK
-  description1 := "You find yourself in open grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass\nYou can go north, east, or west."
+
+  description1 := "You find yourself in open grasslands. The land starts to rise gently to the east, with mountains in the distance. It looks like there is a rope laying in the grass.\nYou can go north, east, or west."
   description2 := "You find yourself in open grasslands. The land here starts to rise gently, with mountains in the distance.\nYou can go north, east, or west."
 
   i := inv("?")
@@ -458,7 +465,7 @@ func sArea() {
     printSlow(description1)
   }
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] || userchoice != validDirections[2] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -517,18 +524,19 @@ func sArea() {
 }
 
 func seArea() {
-  var validDirections = [2]string{"north", "west"}
-  var userchoice string
+  // validDirections = north, west
 
   // count for attempts at climbing cliff without rope.
   count := 0
+
+  var userchoice string
 
   description := "The terrain has turned mountainous. There is a cliff to the north. You *might* be able to climb it...\nYou can go west."
 
   s()
   printSlow(description)
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -600,7 +608,8 @@ func seArea() {
 }
 
 func eArea() {
-  var validDirections = [2]string{"north", "south"}
+  // validDirections = north, south
+
   var userchoice string
 
   description := "You are on a high plateau. To the south is a cliff, and further south than that you can see large mountain ranges in the distance. \nYou can go north or south."
@@ -608,7 +617,7 @@ func eArea() {
   s()
   printSlow(description)
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -645,7 +654,8 @@ func eArea() {
 }
 
 func neArea() {
-  var validDirections = [2]string{"south", "west"}
+  // validDirections = south, west
+
   var userchoice string
 
   description1 := "You enter another forest area. Pines are surrounding you on all sides. There is a path to the west, but when you look closer you see there is a monster standing there, blocking your path. \nYou can go west or south."
@@ -659,7 +669,7 @@ func neArea() {
     printSlow(description2)
   }
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
@@ -763,14 +773,16 @@ func monsterFight() {
 }
 
 func nArea() {
-  var validDirections = [2]string{"north", "east"}
+  // validDirections = north, east
+
   var userchoice string
-  //THIS DESCRIPTION NEEDS WORK
+
   description := "The forest clears and you find yourself in a field of wildflowers. Purple, blue, yellow and red as far as the eye can see. \nYou can go north or east."
+
   s()
   printSlow(description)
 
-  for userchoice != validDirections[0] || userchoice != validDirections[1] {
+  for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
     if userchoice == "north" {
