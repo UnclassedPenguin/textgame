@@ -27,6 +27,7 @@ import (
 // Functions start
 //-----------------------------------------------------------------------------
 
+// Prints the help function when you type help or ?
 func help() {
   dashLine()
   fmt.Println("Help: ")
@@ -112,13 +113,13 @@ func indexOf(str string, s []string) (int) {
 }
 
 // Diagnostics thing to check value of area inv variables
-func checkLocalItems(axe bool, sword bool, rope bool) {
-  fmt.Println("-----------------------------")
-  fmt.Println("   Axe : ", axe)
-  fmt.Println(" Sword : ", sword)
-  fmt.Println("  Rope : ", rope)
-  fmt.Println("-----------------------------")
-}
+//func checkLocalItems(axe bool, sword bool, rope bool) {
+  //fmt.Println("-----------------------------")
+  //fmt.Println("   Axe : ", axe)
+  //fmt.Println(" Sword : ", sword)
+  //fmt.Println("  Rope : ", rope)
+  //fmt.Println("-----------------------------")
+//}
 
 // Just prints a separator
 func dashLine() {
@@ -154,7 +155,6 @@ func exit(i int) {
 //-----------------------------------------------------------------------------
 
 func intro() string{
-  //NEEDS WORK. Make more descriptive/fun
   var name string
   s()
   fmt.Println("Welcome to UnclassedPenguin TextAdventure!")
@@ -281,8 +281,8 @@ func startArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(startAxe, startSword, startRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(startAxe, startSword, startRope)
     } else if userchoice == "look" {
       if startAxe {
         axeDescription = "You see an axe leaning up against a tree."
@@ -313,7 +313,7 @@ func startArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -342,8 +342,10 @@ func wArea() {
 
   if event["log"] {
     eventLog = " To the north it looks like there is a path, but with a large log blocking the way."
+    directions = "\nYou can go east or south."
   } else {
     eventLog = " To the north there is a path you cleared, with a large log split in half on either side."
+    directions = "\nYou can go north, east, or south."
   }
 
   if wAxe {
@@ -363,8 +365,6 @@ func wArea() {
   } else {
     ropeDescription = ""
   }
-
-  directions = "\nYou can go north, east, or south."
 
   description = baseDescription + eventLog + axeDescription + swordDescription + ropeDescription + directions
 
@@ -462,8 +462,8 @@ func wArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(wAxe, wSword, wRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(wAxe, wSword, wRope)
     } else if userchoice == "look" {
       if event["log"] {
         eventLog = " To the north it looks like there is a path, but with a large log blocking the way."
@@ -500,7 +500,7 @@ func wArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -615,8 +615,8 @@ func nwArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(nwAxe, nwSword, nwRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(nwAxe, nwSword, nwRope)
     } else if userchoice == "look" {
       if nwAxe {
         axeDescription = " You see an axe lying on the ground."
@@ -647,7 +647,7 @@ func nwArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -767,8 +767,8 @@ func swArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(swAxe, swSword, swRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(swAxe, swSword, swRope)
     } else if userchoice == "look" {
       if swAxe {
         axeDescription = " You see an axe lying on the ground."
@@ -799,7 +799,7 @@ func swArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -918,8 +918,8 @@ func sArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(sAxe, sSword, sRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(sAxe, sSword, sRope)
     } else if userchoice == "look" {
       if sAxe {
         axeDescription = " You see an axe lying on the ground."
@@ -950,7 +950,7 @@ func sArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -1095,8 +1095,8 @@ func seArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(seAxe, seSword, seRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(seAxe, seSword, seRope)
     } else if userchoice == "look" {
       if seAxe {
         axeDescription = " You see an axe lying on the ground."
@@ -1127,7 +1127,7 @@ func seArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -1244,8 +1244,8 @@ func eArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(eAxe, eSword, eRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(eAxe, eSword, eRope)
     } else if userchoice == "look" {
 
       if eAxe {
@@ -1277,7 +1277,7 @@ func eArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -1409,8 +1409,8 @@ func neArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(neAxe, neSword, neRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(neAxe, neSword, neRope)
     } else if userchoice == "look" {
       if event["monster"] {
         eventMonster = "When you look closer you see there is a monster standing there, blocking your path."
@@ -1447,7 +1447,7 @@ func neArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
@@ -1618,8 +1618,8 @@ func nArea() {
       } else {
         printSlow("What rope?")
       }
-    } else if userchoice == "?" {
-      checkLocalItems(nAxe, nSword, nRope)
+    //} else if userchoice == "?" {
+      //checkLocalItems(nAxe, nSword, nRope)
     } else if userchoice == "look" {
       if nAxe {
         axeDescription = " You see an axe lying on the ground."
@@ -1650,7 +1650,7 @@ func nArea() {
       i := inv("?")
       fmt.Println(i)
       s()
-    } else if userchoice == "help" {
+    } else if userchoice == "help" || userchoice == "?" {
       s()
       help()
     } else if userchoice == "exit" {
