@@ -1007,7 +1007,7 @@ func seArea() {
   for true {
     fmt.Print(" > ")
     fmt.Scan(&userchoice)
-    if userchoice == "north" {
+    if userchoice == "north" || userchoice == "climb" {
       s()
       i := inv("?")
       // If you have the rope, you are guaranteed to climb the cliff. 
