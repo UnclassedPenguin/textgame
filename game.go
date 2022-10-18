@@ -1470,6 +1470,7 @@ func monsterFight() {
     printSlow("You decide to fight the monster.")
 
     for monsterHealth > 0 {
+      // I don't remember why this is + 1? Maybe so it is never 0?
       rn := randNumber(10) + 1
       s()
       printSlow("Pick a number between 1 and 10")
