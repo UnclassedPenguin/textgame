@@ -9,12 +9,12 @@ Just doing this for fun. Seeing where it goes...Does anyone play these anymore, 
 - run: 
 
 ```shell
-$ go build game.go
+$ go build main.go
 ```
 - Then just execute!
 
 ```shell
-$ ./game
+$ ./main
 ```
 
 ### To-do:
